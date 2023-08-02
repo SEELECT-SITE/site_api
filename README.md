@@ -67,17 +67,16 @@ python3 -m venv [venv-name]
 ```sh 
 . venv/bin/activate
 ```
-
-3. Open the api folder :
-
-```sh 
-cd api_poct_biologie/
-```
-
-4. Install requirements :
+3. Install requirements :
 
 ```sh
 pip install -r requirements.txt
+```
+
+4. Open the api folder :
+
+```sh 
+cd api_seelect/
 ```
 
 (Windows)
@@ -87,22 +86,27 @@ pip install -r requirements.txt
 ```sh 
 virtualenv --python C:\Path\To\Python\python.exe venv
 ```
+or
 
+'''sh
+python -m venv venv
+'''
 2. Open venv :
 
 ```sh 
-.\venv\Scripts\activate
+./venv/Scripts/activate
 ```
 
-3. Open the api folder :
+3. Install requirements :
 
-```sh 
-cd api_poct_biologie/
-```
-4. Install requirements :
-
-```sh 
+```sh
 pip install -r requirements.txt
+```
+
+4. Open the api folder :
+
+```sh 
+cd api_seelect/
 ```
 
 If you want to close the venv, just use the command :
