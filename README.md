@@ -89,9 +89,9 @@ virtualenv --python C:\Path\To\Python\python.exe venv
 
 or
 
-'''sh
+```sh
 python -m venv venv
-'''
+```
 
 2. Open venv :
 
