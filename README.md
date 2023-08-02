@@ -86,11 +86,13 @@ cd api_seelect/
 ```sh 
 virtualenv --python C:\Path\To\Python\python.exe venv
 ```
+
 or
 
 '''sh
 python -m venv venv
 '''
+
 2. Open venv :
 
 ```sh 
