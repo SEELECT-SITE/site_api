@@ -21,11 +21,11 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         ordering = ['id']
-        fields = ['id', 'auth', 'first_name', 'last_name', 'username', 'password', 'email', 'date_joined']
+        fields = ['id', 'auth', 'first_name', 'last_name', 'password', 'email', 'date_joined']
 
     # Making it nested with Profile and Token.
     def create(self, validated_data):
-        print(validated_data)
+        #print(validated_data)
         # Separating data
         auth_data = validated_data.pop('auth')
         # Crating user object

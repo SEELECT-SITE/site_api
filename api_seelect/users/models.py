@@ -10,7 +10,6 @@ from functions.generateRandomHash import generateRandomHash
 ###########################################################################################
 # Model for user informations.
 class User(models.Model): 
-    username = models.CharField(max_length=15, unique=True)
     first_name = models.CharField(max_length=64, blank=True)
     last_name = models.CharField(max_length=64, blank=True)
     email = models.EmailField(max_length=256, unique=True)

@@ -35,7 +35,6 @@ class Register(APIView, StandardUserSetPagination):
     """
     def post(self, request, format=None):
         # Getting user data.
-        username = request.POST.get('username', None)
         first_name = request.POST.get('first_name', None)
         last_name = request.POST.get('last_name', None)
         email = request.POST.get('email', None)
@@ -53,7 +52,6 @@ class Register(APIView, StandardUserSetPagination):
 
         # Making data json.
         data = {
-            'username': username,
             'first_name': first_name,
             'last_name': last_name,
             'email': email,
@@ -81,12 +79,12 @@ def login(request):
     Validate the username and password, to log in the user.
     """
     # Getting username and password
-    username = request.POST.get('username', None)
+    email = request.POST.get('email', None)
     password = request.POST.get('password', None)
 
     # Checking if the user exist
     try:
-        user = User.objects.get(username=username)
+        user = User.objects.get(email=email)
     except User.DoesNotExist:
         raise Http404
     
@@ -95,11 +93,11 @@ def login(request):
     
     # Checking if the password is correct
     try:
-        user = User.objects.get(username=username, password=password)
+        user = User.objects.get(email=email, password=password)
     except User.DoesNotExist:
         return HttpResponse('401 Unauthorized', status=401)
     
-    token = UserAuthentication.objects.get(pk=user.auth.id).refresh_token()
+    UserAuthentication.objects.get(pk=user.auth.id).refresh_token()
     
     # Getting the serializer of the user
     serializer = UserSerializer(user)

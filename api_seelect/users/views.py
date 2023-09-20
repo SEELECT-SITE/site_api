@@ -50,7 +50,6 @@ class UserList(APIView, StandardUserSetPagination):
 
     def post(self, request, format=None):
         # Getting user data.
-        username = request.POST.get('username', None)
         first_name = request.POST.get('first_name', None)
         last_name = request.POST.get('last_name', None)
         email = request.POST.get('email', None)
@@ -68,7 +67,6 @@ class UserList(APIView, StandardUserSetPagination):
 
         # Making data json.
         data = {
-            'username': username,
             'first_name': first_name,
             'last_name': last_name,
             'email': email,
@@ -111,7 +109,6 @@ class UserDetail(APIView):
         user = self.get_object(pk)
 
         # Getting user data.
-        username = request.data.get('username', user.username)
         first_name = request.data.get('first_name', user.first_name)
         last_name = request.data.get('last_name', user.last_name)
         email = request.data.get('email', user.email)
@@ -126,7 +123,6 @@ class UserDetail(APIView):
 
         # Making data json.
         data = {
-            'username': username,
             'first_name': first_name,
             'last_name': last_name,
             'email': email,
