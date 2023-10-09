@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'authentication.apps.AuthenticationConfig',
     'contact.apps.ContactConfig',
+    'events.apps.EventsConfig',
+    'kits.apps.KitsConfig',
     'rest_framework',
     'rest_framework.authtoken',
 ]
@@ -55,6 +57,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'api_seelect.middleware.TokenAuthenticationMiddleware'
 ]
 
 ROOT_URLCONF = 'api_seelect.urls'

@@ -27,7 +27,7 @@ class StandardUserSetPagination(PageNumberPagination):
 # .../contact/
 class ContactList(APIView, StandardUserSetPagination):
     """
-    List all users, or create a new user.
+    List all contacts, or create a new contact.
     """
     pagination_class = StandardUserSetPagination
 
@@ -45,21 +45,7 @@ class ContactList(APIView, StandardUserSetPagination):
 
 
     def post(self, request, format=None):
-        # Getting user data.
-        name = request.POST.get('name', None)
-        email = request.POST.get('email', None)
-        phone = request.POST.get('phone', None)
-        message = request.POST.get('message', None)
-
-        # Making data json.
-        data = {
-            'name': name,
-            'email': email,
-            'phone': phone,
-            'message': message,
-        }
-
-        serializer = ContactSerializer(data=data)
+        serializer = ContactSerializer(data=request.data)
 
         if serializer.is_valid():
             serializer.save()
@@ -67,4 +53,40 @@ class ContactList(APIView, StandardUserSetPagination):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+###########################################################################################
+# .../api/contact/<id>/
+class ContactDetail(APIView):
+    """
+    Retrieve, update or delete an contact instance.
+    """
+    def get_object(self, pk):
+        # Getting the event by id.
+        try:
+            return Contact.objects.get(pk=pk)
+        # Return 404 if the event don't exist.
+        except Contact.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        contact = self.get_object(pk)
+        serializer = ContactSerializer(contact)
+        return Response(serializer.data)
+    
+    def put(self, request, pk, format=None):
+        contact = self.get_object(pk)
+
+        serializer = ContactSerializer(contact, data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    def delete(self, request, pk, format=None):
+        contact = self.get_object(pk)
+        contact.delete()
+        
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
 ###########################################################################################

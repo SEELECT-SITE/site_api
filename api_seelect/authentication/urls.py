@@ -5,9 +5,9 @@ from authentication import views
 
 urlpatterns = [
     # Request to get all users.
-    path('register/', views.Register.as_view()),
+    path('register/', views.register, name='register'),
     # Request to validate the login and password.
-    path('login/', views.login),
+    path('login/', views.login, name='login'),
     # Request to get user information using the token.
     #path('loadSession/', views.loadSession)
 ]

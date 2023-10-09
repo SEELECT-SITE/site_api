@@ -9,7 +9,7 @@ from django.utils import timezone
 ###########################################################################################
 # Model for user informations.
 class Contact(models.Model): 
-    name = models.CharField(max_length=32)
+    name = models.CharField(max_length=64)
     email = models.EmailField(max_length=256)
     phone = models.CharField(max_length=16)
     message = models.CharField(max_length=1024)

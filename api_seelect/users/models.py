@@ -3,18 +3,29 @@
 ###########################################################################################
 from django.db import models
 from django.utils import timezone
-from functions.generateRandomHash import generateRandomHash
+from utils.functions.generateRandomHash import generateRandomHash
+from django.core.validators import MaxValueValidator
 
 ###########################################################################################
 # Models                                                                                  #
 ###########################################################################################
 # Model for user informations.
 class User(models.Model): 
-    first_name = models.CharField(max_length=64, blank=True)
-    last_name = models.CharField(max_length=64, blank=True)
+    role = models.CharField(max_length=64, blank=False, null=False, default='user')
     email = models.EmailField(max_length=256, unique=True)
     password = models.CharField(max_length=256, unique=True, null=False, blank=False)
     date_joined = models.DateTimeField(default=timezone.now)
+
+###########################################################################################
+# Model for user informations.
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=False, related_name='profile')
+    first_name = models.CharField(max_length=64, blank=True, default='')
+    last_name = models.CharField(max_length=64, blank=True, default='')
+    ies = models.CharField(max_length=256, blank=True, default='')
+    age = models.PositiveIntegerField(validators=[MaxValueValidator(150)], blank=True, default=0)
+    course = models.CharField(max_length=256, blank=True, default='')
+    semester = models.PositiveIntegerField(validators=[MaxValueValidator(48)], blank=True, default=0)
 
 ###########################################################################################
 # Model for user authentication informations.
@@ -28,5 +39,6 @@ class UserAuthentication(models.Model):
 
     def refresh_token(self):
         self.token = generateRandomHash()
+        self.token_generation_time = timezone.now()
         self.save()
 ###########################################################################################

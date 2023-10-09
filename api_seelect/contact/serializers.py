@@ -7,7 +7,7 @@ from contact.models import Contact
 ###########################################################################################
 # Serializers                                                                             #
 ###########################################################################################
-# User Account Serializer.
+# User Contact Serializer.
 class ContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contact
