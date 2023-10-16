@@ -29,6 +29,17 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3030',
 ]
 
+CORS_ALLOW_HEADERS = [
+    "Authorization",
+    "Token",
+    "Content-type",
+    "Accept",
+    "Origin",
+    "X-Requested-With",
+    "X-csrftoken",
+    "X-XSRF-TOKEN",
+]
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'users.apps.UsersConfig',
     'authentication.apps.AuthenticationConfig',
     'contact.apps.ContactConfig',
@@ -57,6 +69,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'api_seelect.middleware.TokenAuthenticationMiddleware'
 ]
 

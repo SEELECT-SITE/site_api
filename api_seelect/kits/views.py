@@ -42,7 +42,7 @@ class KitsList(APIView, StandardUserSetPagination):
         return Response(serializer.data)
     
     def post(self, request, format=None):
-        kits_data = request.data
+        kits_data = request.data.copy()
         events_data = kits_data.pop('events', [])
 
         user_id = request.data.get('user')
@@ -90,7 +90,7 @@ class KitsDetail(APIView):
     def put(self, request, pk, format=None):
         event = self.get_object(pk)
         
-        kits_data = request.data
+        kits_data = request.data.copy()
         events_data = kits_data.pop('events', [])
 
         kits_serializer = KitsSerializer(event, data=kits_data)
