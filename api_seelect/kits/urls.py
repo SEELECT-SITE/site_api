@@ -7,6 +7,8 @@ urlpatterns = [
     path('', views.KitsList.as_view(), name='kits-list'),
     # Request to get specific kit by id.
     path('<int:pk>/', views.KitsDetail.as_view(), name='kits-detail'),
+    # 
+    path('<int:pk>/confirm_payement/', views.confirm_payement, name='kits-confirm-payement'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

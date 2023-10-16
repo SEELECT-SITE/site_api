@@ -4,6 +4,7 @@
 from django.http import Http404
 
 from rest_framework.views import APIView
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.pagination import PageNumberPagination
@@ -61,7 +62,10 @@ class KitsList(APIView, StandardUserSetPagination):
             for events_id in events_data:
                 try:
                     event = Events.objects.get(pk=events_id)
-                    KitsEvents.objects.create(kit=kit, event=event)
+
+                    if event.newInscription():
+                        KitsEvents.objects.create(kit=kit, event=event)
+
                 except Events.DoesNotExist:
                     pass
 
@@ -88,12 +92,12 @@ class KitsDetail(APIView):
         return Response(serializer.data)
     
     def put(self, request, pk, format=None):
-        event = self.get_object(pk)
+        kit = self.get_object(pk)
         
         kits_data = request.data.copy()
         events_data = kits_data.pop('events', [])
 
-        kits_serializer = KitsSerializer(event, data=kits_data)
+        kits_serializer = KitsSerializer(kit, data=kits_data)
 
         if kits_serializer.is_valid():
             kit = kits_serializer.save() # Update event data
@@ -113,8 +117,39 @@ class KitsDetail(APIView):
     
     def delete(self, request, pk, format=None):
         kit = self.get_object(pk)
+        
+        # Access associated events
+        associated_events = kit.events.all()
+
+        # Print the associated events
+        for event in associated_events:
+            event = Events.objects.get(pk=event.id)
+            event.deleteInscription()
+        
         kit.delete()
         
         return Response(status=status.HTTP_204_NO_CONTENT)
     
+###########################################################################################
+# .../api/kits/<id>/confirm_payement/
+@api_view(['POST'])
+def confirm_payement(request, pk):
+    """
+    Confirm payment.
+    """
+
+    # Getting the event by id.
+    try:
+        kit = Kits.objects.get(pk=pk)
+    # Return 404 if the event don't exist.
+    except Kits.DoesNotExist:
+        raise Http404
+    
+    kit.is_payed = True
+    kit.save()
+    
+    serializer = KitsSerializer(kit)
+    
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
 ###########################################################################################

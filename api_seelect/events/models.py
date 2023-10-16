@@ -24,14 +24,22 @@ class Events(models.Model):
     number_of_inscriptions = models.PositiveIntegerField(validators=[MaxValueValidator(1000)], blank=False, null=False, default=0)
     max_number_of_inscriptions = models.PositiveIntegerField(validators=[MaxValueValidator(1000)], blank=False, null=False)
     place = models.ManyToManyField(Places, through='EventsPlaces')
+    course_time = models.CharField(max_length=24, blank=True, null=True, default='00:00:00-00:00:00')
+    date_start = models.DateTimeField(default='2023-12-12T00:00:00.000000Z')
+    date_end = models.DateTimeField(default='2023-12-12T00:00:00.000000Z')
     date_created = models.DateTimeField(default=timezone.now)
 
     def newInscription(self):
-        if (self.number_of_inscriptions < self.max__number_of_inscriptions):
+        if (self.number_of_inscriptions < self.max_number_of_inscriptions):
             self.number_of_inscriptions += 1
+            self.save()
+            return True
+        else:
+            return None
     
     def deleteInscription(self):
         self.number_of_inscriptions -= 1
+        self.save()
 
 ###########################################################################################
 # Model to relate events and places

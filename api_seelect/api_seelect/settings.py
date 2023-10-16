@@ -27,6 +27,7 @@ ALLOWED_HOSTS = ['*']
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3030',
+    'https://seelect.com.br',
 ]
 
 CORS_ALLOW_HEADERS = [
@@ -38,6 +39,7 @@ CORS_ALLOW_HEADERS = [
     "X-Requested-With",
     "X-csrftoken",
     "X-XSRF-TOKEN",
+    "ngrok-skip-browser-warning",
 ]
 
 # Application definition

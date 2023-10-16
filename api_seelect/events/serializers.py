@@ -21,7 +21,7 @@ class EventsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Events
         ordering = ['id']
-        fields = ['id', 'title', 'category', 'number_of_inscriptions', 'max_number_of_inscriptions', 'date_created', 'place']
+        fields = ['id', 'title', 'category', 'number_of_inscriptions', 'max_number_of_inscriptions', 'date_start', 'date_end', 'course_time', 'date_created', 'place']
 
     def get_place(self, obj):
         # Assuming you have a ManyToMany relationship to Places in Events
