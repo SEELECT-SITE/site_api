@@ -18,7 +18,19 @@ class UserAuthenticationSerializer(serializers.ModelSerializer):
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
-        fields = ['id', 'first_name', 'last_name', 'ies', 'birthday', 'course', 'semester']
+        fields = ['id', 'first_name', 'last_name', 'ies', 'cpf', 'birthday', 'course', 'semester']
+        
+###########################################################################################
+# User Profile Resumed Serializer.
+class UserProfileResumedSerializer(serializers.ModelSerializer):
+    name = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = UserProfile
+        fields = ['id', 'name']
+        
+    def get_name(self, obj):
+        return f"{obj.first_name} {obj.last_name}"
 
 ###########################################################################################
 # User Serializer, it's a nest serializer.

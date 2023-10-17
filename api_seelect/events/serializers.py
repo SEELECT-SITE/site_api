@@ -3,6 +3,7 @@
 ###########################################################################################
 from rest_framework import serializers
 from events.models import Places, Events, EventsPlaces
+from kits.serializers import *
 
 ###########################################################################################
 # Serializers                                                                             #
@@ -17,7 +18,7 @@ class PlacesSerializer(serializers.ModelSerializer):
 # Events Serializer
 class EventsSerializer(serializers.ModelSerializer):
     place = serializers.SerializerMethodField()
-
+    
     class Meta:
         model = Events
         ordering = ['id']

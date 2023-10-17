@@ -9,6 +9,8 @@ from rest_framework import status
 from rest_framework.pagination import PageNumberPagination
 
 from events.serializers import *
+from kits.serializers import KitsEventsSerializer, KitsEvents
+from users.serializers import UserProfileResumedSerializer
 
 ###########################################################################################
 # Pagination Classes                                                                      #
@@ -72,8 +74,28 @@ class EventsDetail(APIView):
 
     def get(self, request, pk, format=None):
         event = self.get_object(pk)
+        
+        query = KitsEvents.objects.all().filter(event=pk)
+        
+        # Creating array
+        participants = []
+        
+        # Getting all kits that are related with this event
+        for element in KitsEventsSerializer(query, many=True).data:
+            
+            kit = Kits.objects.get(pk=element['kit'])            
+            
+            profile_serializer = UserProfileResumedSerializer(kit.user)
+            
+            participants.append(profile_serializer.data)
+            
         serializer = EventsSerializer(event)
-        return Response(serializer.data)
+        
+        # Add participants kits in event serializer
+        data = serializer.data
+        data['participants'] = participants
+        
+        return Response(data)
     
     def put(self, request, pk, format=None):
         event = self.get_object(pk)

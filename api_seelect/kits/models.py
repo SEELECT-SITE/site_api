@@ -30,7 +30,6 @@ class Kits(models.Model):
     date_created = models.DateTimeField(default=timezone.now)
 
 ###########################################################################################
-
 # Model to relate kits and events
 class KitsEvents(models.Model):
     kit = models.ForeignKey(Kits, on_delete=models.CASCADE)

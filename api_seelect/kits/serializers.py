@@ -20,11 +20,6 @@ class KitsModelSerializer(serializers.ModelSerializer):
 class KitsSerializer(serializers.ModelSerializer):
     events = serializers.SerializerMethodField()
     model_detail = KitsModelSerializer(source='model', read_only=True)
-    '''
-    minicourse = serializers.SerializerMethodField()
-    workshops = serializers.SerializerMethodField()
-    speeches = serializers.SerializerMethodField()
-    '''
 
     class Meta:
         model = Kits
@@ -35,19 +30,6 @@ class KitsSerializer(serializers.ModelSerializer):
         # Assuming you have a ManyToMany relationship to Minicourses in Events
         events = obj.events.all()                           # Retrieve the associated mini_courses
         return EventsSerializer(events, many=True).data     # Serialize the mini_courses 
-    '''
-    def get_minicourse(self, obj):
-        minicourse = obj.events.all().filter(category='minicurso')
-        return EventsSerializer(minicourse, many=True).data
-    
-    def get_workshops(self, obj):
-        workshops = obj.events.all().filter(category='workshop')
-        return EventsSerializer(workshops, many=True).data
-    
-    def get_speeches(self, obj):
-        speeches = obj.events.all().filter(category='workshop')
-        return EventsSerializer(speeches, many=True).data
-    '''
 
 ###########################################################################################
 # EventsPlaces Serializer
