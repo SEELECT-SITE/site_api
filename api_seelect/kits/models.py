@@ -20,6 +20,15 @@ class Kits(models.Model):
     date_created = models.DateTimeField(default=timezone.now)
 
 ###########################################################################################
+# Model for kits types.
+class Kits(models.Model):
+    model = models.CharField(max_length=24, blank=False, null=False)
+    speeches = models.BooleanField(blank=False, null=False, default=False)
+    description = models.TextField(blank=True, default='')
+    workshops = models.IntegerField(blank=True, default=0)
+    bucks_coup = models.BooleanField(blank=False, null=False, default=False)
+
+###########################################################################################
 # Model to relate kits and events
 class KitsEvents(models.Model):
     kit = models.ForeignKey(Kits, on_delete=models.CASCADE)

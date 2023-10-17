@@ -102,13 +102,23 @@ class KitsDetail(APIView):
         if kits_serializer.is_valid():
             kit = kits_serializer.save() # Update event data
 
+            # Access associated events
+            associated_events = kit.events.all()
+
+            # Print the associated events
+            for event in associated_events:
+                event = Events.objects.get(pk=event.id)
+                event.deleteInscription()
+                
             # Remove existing associations with places
             kit.events.clear()
 
             for events_id in events_data:
                 try:
                     event = Events.objects.get(pk=events_id)
-                    KitsEvents.objects.create(kit=kit, event=event)
+                    
+                    if event.newInscription():
+                        KitsEvents.objects.create(kit=kit, event=event)
                 except Events.DoesNotExist:
                     pass
             
