@@ -8,23 +8,34 @@ from events.serializers import EventsSerializer
 ###########################################################################################
 # Serializers                                                                             #
 ############################################################################################
+# Kits Model Serializer
+class KitsModelSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = KitModels
+        fields = '__all__'
+        
+###########################################################################################
 # Kits Serializer
 class KitsSerializer(serializers.ModelSerializer):
     events = serializers.SerializerMethodField()
+    model_detail = KitsModelSerializer(source='model', read_only=True)
+    '''
     minicourse = serializers.SerializerMethodField()
     workshops = serializers.SerializerMethodField()
     speeches = serializers.SerializerMethodField()
+    '''
 
     class Meta:
         model = Kits
         ordering = ['id']
-        fields = ['id', 'user', 'is_payed', 'model', 'events', 'minicourse', 'workshops', 'speeches', 'date_created']
+        fields = ['id', 'user', 'is_payed', 'model', 'model_detail', 'events', 'date_created']
 
     def get_events(self, obj):
         # Assuming you have a ManyToMany relationship to Minicourses in Events
         events = obj.events.all()                           # Retrieve the associated mini_courses
         return EventsSerializer(events, many=True).data     # Serialize the mini_courses 
-    
+    '''
     def get_minicourse(self, obj):
         minicourse = obj.events.all().filter(category='minicurso')
         return EventsSerializer(minicourse, many=True).data
@@ -36,6 +47,7 @@ class KitsSerializer(serializers.ModelSerializer):
     def get_speeches(self, obj):
         speeches = obj.events.all().filter(category='workshop')
         return EventsSerializer(speeches, many=True).data
+    '''
 
 ###########################################################################################
 # EventsPlaces Serializer

@@ -20,13 +20,13 @@ class Places(models.Model):
 # Model for event informations.
 class Events(models.Model): 
     title = models.CharField(max_length=256, blank=True)
+    host = models.CharField(max_length=256, blank=True, null=False)
     category = models.CharField(max_length=256, blank=True)
     number_of_inscriptions = models.PositiveIntegerField(validators=[MaxValueValidator(1000)], blank=False, null=False, default=0)
     max_number_of_inscriptions = models.PositiveIntegerField(validators=[MaxValueValidator(1000)], blank=False, null=False)
     place = models.ManyToManyField(Places, through='EventsPlaces')
-    course_time = models.CharField(max_length=24, blank=True, null=True, default='00:00:00-00:00:00')
-    date_start = models.DateTimeField(default='2023-12-12T00:00:00.000000Z')
-    date_end = models.DateTimeField(default='2023-12-12T00:00:00.000000Z')
+    date = models.JSONField(blank=True, default=dict)
+    description = models.TextField(blank=True, null=False, default="")
     date_created = models.DateTimeField(default=timezone.now)
 
     def newInscription(self):

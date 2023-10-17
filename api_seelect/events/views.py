@@ -42,7 +42,7 @@ class EventsList(APIView, StandardUserSetPagination):
     
     def post(self, request, format=None):
         events_data = request.data.copy()
-        places_data = events_data.pop('places', [])
+        places_data = events_data.pop('place', [])
         serializer = EventsSerializer(data=events_data)
         if serializer.is_valid():
             event = serializer.save()
@@ -79,7 +79,7 @@ class EventsDetail(APIView):
         event = self.get_object(pk)
         
         events_data = request.data.copy()
-        places_data = events_data.pop('places', [])
+        places_data = events_data.pop('place', [])
 
         event_serializer = EventsSerializer(event, data=events_data)
 

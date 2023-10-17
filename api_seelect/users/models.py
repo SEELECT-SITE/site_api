@@ -23,7 +23,7 @@ class UserProfile(models.Model):
     first_name = models.CharField(max_length=64, blank=True, default='')
     last_name = models.CharField(max_length=64, blank=True, default='')
     ies = models.CharField(max_length=256, blank=True, default='')
-    age = models.PositiveIntegerField(validators=[MaxValueValidator(150)], blank=True, default=0)
+    birthday = models.DateField(blank=True, null=False, default="2000-01-01")
     course = models.CharField(max_length=256, blank=True, default='')
     semester = models.PositiveIntegerField(validators=[MaxValueValidator(48)], blank=True, default=0)
 

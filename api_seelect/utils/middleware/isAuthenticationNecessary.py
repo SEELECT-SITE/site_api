@@ -7,7 +7,7 @@ endpoints_with_no_authentication_necessary = [
 ]
 
 # Function to check it
-def is_authentication_necessary(request):
+def isAuthenticationNecessary(request):
     if (request.method, request.path) in endpoints_with_no_authentication_necessary:
         return False
     else:

@@ -5,10 +5,12 @@ from rest_framework import status
 from django.http import HttpResponse
 
 from utils.middleware.getUserFromToken import get_user_from_token
-from utils.middleware.isAuthenticationNecessary import is_authentication_necessary
+from utils.middleware.isAuthenticationNecessary import isAuthenticationNecessary
 
-# Token Authentication Middleware
-class TokenAuthenticationMiddleware:
+from utils.middleware.userAuthentication import canUserAcess
+
+# Authentication Middleware
+class AuthenticationMiddleware:
     # Init default
     def __init__(self, get_response):
         self.get_response = get_response
@@ -16,13 +18,22 @@ class TokenAuthenticationMiddleware:
     # Call default
     def __call__(self, request):
         # Endpoints with is not necessary the token
-        if not is_authentication_necessary(request):
+        if not isAuthenticationNecessary(request):
             response = self.get_response(request)
             return response
-        # Check token here
+        
+        # If the endpoint is not there, let's check the Token
+        # Checking token here
         user = get_user_from_token(request)
+                
         if user is None:
             return HttpResponse("Invalid token", status=status.HTTP_401_UNAUTHORIZED)
+        
+        # Now, let's check if the user can acess this endpoint
+        if user.role == 'user' and canUserAcess(request=request, user=user) == False:
+            return HttpResponse("Access unauthorized!", status=status.HTTP_401_UNAUTHORIZED)
 
         response = self.get_response(request)
         return response
+
+###########################################################################################

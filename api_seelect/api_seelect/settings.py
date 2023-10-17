@@ -27,6 +27,7 @@ ALLOWED_HOSTS = ['*']
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3030',
+    'http://localhost:3000',
     'https://seelect.com.br',
 ]
 
@@ -72,7 +73,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'api_seelect.middleware.TokenAuthenticationMiddleware'
+    'api_seelect.middleware.AuthenticationMiddleware'
 ]
 
 ROOT_URLCONF = 'api_seelect.urls'

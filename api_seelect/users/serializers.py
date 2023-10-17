@@ -18,7 +18,7 @@ class UserAuthenticationSerializer(serializers.ModelSerializer):
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
-        fields = ['id', 'first_name', 'last_name', 'ies', 'age', 'course', 'semester']
+        fields = ['id', 'first_name', 'last_name', 'ies', 'birthday', 'course', 'semester']
 
 ###########################################################################################
 # User Serializer, it's a nest serializer.

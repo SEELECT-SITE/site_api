@@ -46,6 +46,7 @@ class KitsList(APIView, StandardUserSetPagination):
         kits_data = request.data.copy()
         events_data = kits_data.pop('events', [])
 
+        # Check if user id exist.
         user_id = request.data.get('user')
 
         try:
@@ -53,6 +54,14 @@ class KitsList(APIView, StandardUserSetPagination):
         except UserProfile.DoesNotExist:
             return Response({"error": "User profile with ID {} does not exist.".format(user_id)}, status=status.HTTP_404_NOT_FOUND)
 
+        # Check if model id exist.
+        model_id = request.data.get('model')
+        
+        try:
+            model = KitModels.objects.get(pk=model_id)
+        except KitModels.DoesNotExist:
+            return Response({"error": "Kit Model with ID {} does not exist.".format(model_id)}, status=status.HTTP_404_NOT_FOUND)
+                
         serializer = KitsSerializer(data=kits_data)
 
         if serializer.is_valid():
@@ -76,19 +85,19 @@ class KitsList(APIView, StandardUserSetPagination):
 # .../api/kits/<id>
 class KitsDetail(APIView):
     """
-    Retrieve, update or delete an event instance.
+    Retrieve, update or delete a kit instance.
     """
     def get_object(self, pk):
-        # Getting the event by id.
+        # Getting the kit by id.
         try:
             return Kits.objects.get(pk=pk)
-        # Return 404 if the event don't exist.
+        # Return 404 if the kit don't exist.
         except Kits.DoesNotExist:
             raise Http404
 
     def get(self, request, pk, format=None):
-        event = self.get_object(pk)
-        serializer = KitsSerializer(event)
+        kit = self.get_object(pk)
+        serializer = KitsSerializer(kit)
         return Response(serializer.data)
     
     def put(self, request, pk, format=None):
@@ -137,6 +146,71 @@ class KitsDetail(APIView):
             event.deleteInscription()
         
         kit.delete()
+        
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+###########################################################################################
+# .../api/kits/models/
+class KitsModelsList(APIView, StandardUserSetPagination):
+    """
+    List all kits models, or create a new kit model.
+    """
+    pagination_class = StandardUserSetPagination
+
+    def get(self, request, format=None):    
+        queryset = KitModels.objects.get_queryset().order_by('id')
+        
+        page = self.paginate_queryset(queryset, request)
+
+        if page is not None:
+            serializer = KitsModelSerializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = KitModels(queryset, many=True)
+        return Response(serializer.data)
+    
+    def post(self, request, format=None):
+        serializer = KitsModelSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)   
+
+###########################################################################################
+# .../api/kits/models/<id>
+class KitsModelsDetail(APIView):
+    """
+    Retrieve, update or delete a kit model instance.
+    """
+    def get_object(self, pk):
+        # Getting the kit model by id.
+        try:
+            return KitModels.objects.get(pk=pk)
+        # Return 404 if the kit model don't exist.
+        except KitModels.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        model = self.get_object(pk)
+        serializer = KitsModelSerializer(model)
+        return Response(serializer.data)
+    
+    def put(self, request, pk, format=None):
+        model = self.get_object(pk)
+
+        serializer = KitsModelSerializer(model, data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  
+    
+    def delete(self, request, pk, format=None):
+        model = self.get_object(pk)
+        model.delete()
         
         return Response(status=status.HTTP_204_NO_CONTENT)
     
