@@ -100,7 +100,7 @@ def register(request):
         "Confirmação de Cadastro no Seelect",
         email_message,
         "joelkalil1@gmail.com",
-        ["joelkalil1@gmail.com"],
+        [email],
         fail_silently=False
     )
 
