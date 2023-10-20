@@ -31,7 +31,7 @@ python manage.py makemigrations events
 python manage.py makemigrations kits
 python manage.py migrate
 
-#python manage.py loaddata db/users.json
+python manage.py loaddata db/users.json
 python manage.py loaddata db/discount.json
 python manage.py loaddata db/events.json
 python manage.py loaddata db/kits_models.json

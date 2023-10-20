@@ -1,0 +1,74 @@
+[
+    {
+        "model": "users.user",
+        "pk": 1,
+        "fields": {
+            "role": "admin",
+            "email": "abraao@gmail.com",
+            "password": "pbkdf2_sha256$600000$XP>@.mwKrz$5nghMUNWb+EMNI2wGPqeu+L8d2Fdh6+oaNGozQ+SB8k=",
+            "date_joined": "2023-10-20T14:13:12.478084Z"
+        }
+    },
+    {
+        "model": "users.user",
+        "pk": 2,
+        "fields": {
+            "role": "admin",
+            "email": "admin@samael.com",
+            "password": "pbkdf2_sha256$600000$Dd\\()|l5RV$zoahY+UcbKAm23t+7bCnCZibXjJhw1AoplQFD6UcZ3E=",
+            "date_joined": "2023-10-19T15:45:08.688Z"
+        }
+    },
+    {
+        "model": "users.userprofile",
+        "pk": 1,
+        "fields": {
+            "user": 1,
+            "first_name": "Abraao",
+            "last_name": "Seelect",
+            "ies": "Universidade Federal do Ceará (UFC)",
+            "birthday": "2000-01-01",
+            "cpf": "",
+            "course": "Engenharia de Telecomunicações",
+            "semester": 0
+        }
+    },
+    {
+        "model": "users.userprofile",
+        "pk": 2,
+        "fields": {
+            "user": 2,
+            "first_name": "Samael",
+            "last_name": "Rocha",
+            "ies": "Universidade Federal do Ceará (UFC)",
+            "birthday": "2000-01-01",
+            "cpf": "08561937394",
+            "course": "Engenharia de Telecomunicações",
+            "semester": 4
+        }
+    },
+    {
+        "model": "users.userauthentication",
+        "pk": 1,
+        "fields": {
+            "user": 1,
+            "password_salt": "XP>@.mwKrz",
+            "hash_algorithm": "",
+            "token": "ed9e3650ca433a31c5f85614804c586a",
+            "email_validation": false,
+            "token_generation_time": "2023-10-20T14:13:12.478084Z"
+        }
+    },
+    {
+        "model": "users.userauthentication",
+        "pk": 2,
+        "fields": {
+            "user": 2,
+            "password_salt": "Dd\\()|l5RV",
+            "hash_algorithm": "",
+            "token": "c20c86e66deb94f8bfcb241e90fcca00",
+            "email_validation": false,
+            "token_generation_time": "2023-10-20T11:07:43.364Z"
+        }
+    }
+]

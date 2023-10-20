@@ -91,46 +91,16 @@
         "model": "events.places",
         "pk": 9,
         "fields": {
-            "location": "Auditório DETI",
-            "url_location": "https://maps.app.goo.gl/GhLkwQtK3Er9cQcP7",
-            "capacity": 115,
+            "location": "SMD - Laboratório 3 (MAC)",
+            "url_location": "https://maps.app.goo.gl/UCnGnZgHrHJxCFTZ8",
+            "capacity": 21,
             "equipaments": "",
-            "date_created": "2023-10-19T17:42:53.968Z"
-        }
-    },
-    {
-        "model": "events.places",
-        "pk": 10,
-        "fields": {
-            "location": "Auditório DETI",
-            "url_location": "https://maps.app.goo.gl/GhLkwQtK3Er9cQcP7",
-            "capacity": 115,
-            "equipaments": "",
-            "date_created": "2023-10-19T17:43:51.604Z"
+            "date_created": "2023-10-20T13:20:39.989Z"
         }
     },
     {
         "model": "events.events",
         "pk": 1,
-        "fields": {
-            "title": "ABERTURA GAUDIUM$patrocinador",
-            "host": "Bruno Muniz e Ricardo Góes",
-            "category": "palestra",
-            "number_of_inscriptions": 0,
-            "max_number_of_inscriptions": 115,
-            "date": {
-                "0": {
-                    "start": "2023-11-06T09:00",
-                    "end": "2023-11-06T11:00"
-                }
-            },
-            "description": "Bruno Muniz é formado em Ciência da Computação (UECE) e Mestre em Informática (PUC-Rio). Teve seu primeiro contato com tecnologia aos 10 anos de idade e desde então nunca mais parou. Está no espírito e no sangue construir soluções tecnológicas práticas para resolver as dores das pessoas e empresas. Transita bem como líder multiplicador de propósito e cultura, e também em diferentes áreas como Estratégia, Vendas, Marketing, Produto, Programação e Infraestrutura. Ricardo Góes é engenheiro formado pelo IME (Instituto Militar de Engenharia) com MBA em Gestão Estratégica de Tecnologia da Informação pela UFRJ. PMP (Project Management Professional) desde 2008 com mais de 20 anos de experiência em gerenciamento de projetos de alto risco e complexidade.",
-            "date_created": "2023-10-19T18:57:20.927Z"
-        }
-    },
-    {
-        "model": "events.events",
-        "pk": 2,
         "fields": {
             "title": "Gerenciamento Ágil na Prática",
             "host": "Normalabs",
@@ -149,7 +119,7 @@
     },
     {
         "model": "events.events",
-        "pk": 3,
+        "pk": 2,
         "fields": {
             "title": "Trilhando o Caminho da Segurança da Informação",
             "host": "Murilo Cirino Nogueira da Network Secure",
@@ -168,7 +138,7 @@
     },
     {
         "model": "events.events",
-        "pk": 4,
+        "pk": 3,
         "fields": {
             "title": "Projetos em Engenharia Elétrica",
             "host": "Henrique Tavares da Pulso Engenharia",
@@ -187,7 +157,7 @@
     },
     {
         "model": "events.events",
-        "pk": 5,
+        "pk": 4,
         "fields": {
             "title": "Futuro do Setor Elétrico na Era da Singularidade",
             "host": "Camilo Camurça",
@@ -206,7 +176,7 @@
     },
     {
         "model": "events.events",
-        "pk": 6,
+        "pk": 5,
         "fields": {
             "title": "Uma Visão Geral sobre a Computação em Nuvem com a Google",
             "host": "Iury Rosal da Apoena Stack",
@@ -225,7 +195,7 @@
     },
     {
         "model": "events.events",
-        "pk": 7,
+        "pk": 6,
         "fields": {
             "title": "PALESTRA H2V",
             "host": "Ênio Pontes",
@@ -244,7 +214,7 @@
     },
     {
         "model": "events.events",
-        "pk": 8,
+        "pk": 7,
         "fields": {
             "title": "A importância e o Potencial de Fortaleza no Mercado de Telecomunicações Mundial",
             "host": "Felipe Yasuda da Angola Cables",
@@ -263,7 +233,7 @@
     },
     {
         "model": "events.events",
-        "pk": 9,
+        "pk": 8,
         "fields": {
             "title": "Desenvolvimento Web Fullstack",
             "host": "Arthur Baquit",
@@ -290,7 +260,7 @@
     },
     {
         "model": "events.events",
-        "pk": 10,
+        "pk": 9,
         "fields": {
             "title": "As profissões mais promissoras da era da inteligência artificial",
             "host": "Aguimar Mendonça Neto",
@@ -309,7 +279,7 @@
     },
     {
         "model": "events.events",
-        "pk": 11,
+        "pk": 10,
         "fields": {
             "title": "A era do Hidrogênio - Limpo e Inesgotável",
             "host": "Marcelo Serra",
@@ -328,7 +298,7 @@
     },
     {
         "model": "events.events",
-        "pk": 12,
+        "pk": 11,
         "fields": {
             "title": "Computação Quântica: Moda ou Realidade?",
             "host": "Hilma Vasconcelos",
@@ -347,7 +317,7 @@
     },
     {
         "model": "events.events",
-        "pk": 13,
+        "pk": 12,
         "fields": {
             "title": "Desenvolvimento Web em uma Big Four: Trajetória e Oportunidades",
             "host": "Maria Eduarda Rocha",
@@ -366,7 +336,7 @@
     },
     {
         "model": "events.events",
-        "pk": 14,
+        "pk": 13,
         "fields": {
             "title": "MESA REDONDA Mulheres na Programação",
             "host": "Code Girls UECE",
@@ -384,11 +354,251 @@
         }
     },
     {
+        "model": "events.events",
+        "pk": 14,
+        "fields": {
+            "title": "Desvendando LLM e Lang Chain: Uma Jornada Prática na Linguagem Natural",
+            "host": "Pedro Landim",
+            "category": "workshop",
+            "number_of_inscriptions": 0,
+            "max_number_of_inscriptions": 23,
+            "date": {
+                "0": {
+                    "start": "2023-11-07T13:30",
+                    "end": "2023-11-07T15:30"
+                }
+            },
+            "description": "Pedro Leonardo Landim Torquato é graduando em Ciência da Computação pela Universidade de Fortaleza. Atualmente é analista da Secretaria da Fazenda do Estado do Ceará. Tem experiência na criação de robôs para automação de processos.",
+            "date_created": "2023-10-20T12:38:06.293Z"
+        }
+    },
+    {
+        "model": "events.events",
+        "pk": 15,
+        "fields": {
+            "title": "Redes Neurais",
+            "host": "Aloísio Dias",
+            "category": "minicurso",
+            "number_of_inscriptions": 0,
+            "max_number_of_inscriptions": 16,
+            "date": {
+                "0": {
+                    "start": "2023-11-06T16:00",
+                    "end": "2023-11-06T18:00"
+                }
+            },
+            "description": "Durante este minicurso, abordaremos tópicos essenciais para aqueles que desejam compreender e aplicar técnicas de Redes Neurais de maneira sólida e eficaz. Você irá mergulhar no conceito de abstração no contexto do aprendizado de máquina, explorar diversos paradigmas de aprendizagem, adentrar o universo das redes neurais artificiais e compreender o funcionamento do perceptron, além de aprofundar-se na aprendizagem deste componente crucial nas redes neurais. Além disso, abordaremos temas como sistemas não linearmente separáveis, o ADALINE e redes perceptron de múltiplas camadas, culminando em exemplos práticos e exercícios para consolidar o seu conhecimento.  Aloísio Dias é Engenheiro Eletricista formado pela Universidade Federal do Ceará (UFC) e pós-graduado em Engenharia de Segurança do Trabalho pela Universidade Cândido Mendes (UCAM). Desenvolveu pesquisa nas áreas de Inteligência Computacional Aplicada e Controle, com ênfase em Projeto de Controladores para Sistemas Dinâmicos Não Lineares a partir de Estratégias Adaptativas. Entusiasta da Indústria 4.0, possui experiência na elaboração de projetos elétricos, automação industrial e residencial, controle de processos, análise e certificação de projetos eólicos e fotovoltaicos, inspeção e auditoria predial e eficiência energética. Também foi Diretor Geral no Instituto de Tecnologia, Educação, Cultura e Ciência (ITECCI) e Diretor Executivo do Grupo LIDAAE, empresa atuante nos segmentos de engenharia e consultoria. Hoje atua como consultor em processos de automação industrial, sistemas FV e ministra cursos e palestras nas áreas de Engenharia, Automação e Computação.",
+            "date_created": "2023-10-20T12:40:19.210Z"
+        }
+    },
+    {
+        "model": "events.events",
+        "pk": 16,
+        "fields": {
+            "title": "Comunicação 5G",
+            "host": "João Victor Lopez do Huawei Club Unifor",
+            "category": "workshop",
+            "number_of_inscriptions": 0,
+            "max_number_of_inscriptions": 16,
+            "date": {
+                "0": {
+                    "start": "2023-11-07T15:30",
+                    "end": "2023-11-07T18:00"
+                }
+            },
+            "description": "Neste curso, você aprenderá a história das comunicações sem fio, a importância dos padrões globais, por que o espectro é tão valioso e sobre as principais tecnologias que tornam o 5G possível.  João Victor Lopez é pesquisador em Ciência de Dados e Inteligência Artificial na Universidade de Fortaleza e contribuiu para melhorias na produtividade jurisdicional através de técnicas de PLN. Como Embaixador da Huawei ICT Academy Brasil, fundou o Huawei Club Unifor, promovendo capacitação tecnológica; sua trajetória acadêmica e profissional fortaleceu habilidades em análise de dados, IA e liderança de projetos, sempre visando avanços em gestão e computação.",
+            "date_created": "2023-10-20T12:43:21.460Z"
+        }
+    },
+    {
+        "model": "events.events",
+        "pk": 17,
+        "fields": {
+            "title": "IA Generativa - Impactos, Desafios e Aplicações na Engenharia",
+            "host": "Camilo Camurça",
+            "category": "workshop",
+            "number_of_inscriptions": 0,
+            "max_number_of_inscriptions": 16,
+            "date": {
+                "0": {
+                    "start": "2023-11-07T15:30",
+                    "end": "2023-11-07T18:00"
+                }
+            },
+            "description": "Você é um estudante de engenharia curioso em busca de maneiras de se destacar em sua futura carreira? Este Workshop é projetado para transformar a maneira como você aborda desafios. Explore o potencial da Inteligência Artificial (IA) Generativa e como ela está revolucionando a Engenharia, aprenda a superar mitos e bloqueios comuns que podem prejudicar sua criatividade, descubra como a IA generativa pode ser usada para estimular a criatividade e a inovação em projetos de engenharia, explore dilemas éticos atuais e futuros enfrentados pelos engenheiros no uso da IA generativa, adquira habilidades práticas para aplicar a IA generativa em seus projetos, através da Engenharia de Prompt. Camilo Camurça é um profissional com mais de 20 anos de trajetória na Engenharia Elétrica, e vasta experiência em ensino, pesquisa e extensão acadêmica desde a sua graduação na Universidade Federal do Ceará. Além disso, ele traz uma valiosa passagem pelo setor de Mineração e Metalurgia, onde obteve seu Mestrado Profissional na Universidade Federal de Ouro Preto, em colaboração com a Companhia Vale. Com uma sólida atuação no Setor Elétrico, na Coelce / Enel, Camilo ocupou uma série de cargos, de analista a especialista, coordenador e gestor. Sua abrangente atuação abarca planejamento da expansão do sistema elétrico, qualidade do serviço, engenharia e construção, transformação digital, gestão da mudança, auditoria, intraempreendedorismo, além de ser multiplicador facilitador, gestor de negócios, gerente de projetos, embaixador e mentor de inovação. Em 2020, fundou a Nexus beW Empreendedorismo, uma iniciativa dedicada a disseminar o conceito do Nexialismo, cuja missão é restabelecer o equilíbrio entre competências técnicas e comportamentais, sustentação e disrupção, eficiência e inovação, segurança e risco, planejamento e aprendizado. A Nexus compartilha o propósito de Camilo, que é promover a transição para uma nova mentalidade no mundo pós-digital, desenvolvendo o máximo potencial das pessoas e empresas, além de restaurar o equilíbrio nas relações da sociedade, para auxiliá-los a alcançarem resultados relevantes e preservarem valor de forma atemporal.",
+            "date_created": "2023-10-20T12:45:30.706Z"
+        }
+    },
+    {
+        "model": "events.events",
+        "pk": 18,
+        "fields": {
+            "title": "Redes Neurais",
+            "host": "Aloísio Dias",
+            "category": "minicurso",
+            "number_of_inscriptions": 0,
+            "max_number_of_inscriptions": 23,
+            "date": {
+                "0": {
+                    "start": "2023-11-06T16:00",
+                    "end": "2023-11-06T18:00"
+                },
+                "1": {
+                    "start": "2023-11-08T16:00",
+                    "end": "2023-11-08T18:00"
+                },
+                "2": {
+                    "start": "2023-11-09T16:00",
+                    "end": "2023-11-09T18:00"
+                }
+            },
+            "description": "Durante este minicurso, abordaremos tópicos essenciais para aqueles que desejam compreender e aplicar técnicas de Redes Neurais de maneira sólida e eficaz. Você irá mergulhar no conceito de abstração no contexto do aprendizado de máquina, explorar diversos paradigmas de aprendizagem, adentrar o universo das redes neurais artificiais e compreender o funcionamento do perceptron, além de aprofundar-se na aprendizagem deste componente crucial nas redes neurais. Além disso, abordaremos temas como sistemas não linearmente separáveis, o ADALINE e redes perceptron de múltiplas camadas, culminando em exemplos práticos e exercícios para consolidar o seu conhecimento.  Aloísio Dias é Engenheiro Eletricista formado pela Universidade Federal do Ceará (UFC) e pós-graduado em Engenharia de Segurança do Trabalho pela Universidade Cândido Mendes (UCAM). Desenvolveu pesquisa nas áreas de Inteligência Computacional Aplicada e Controle, com ênfase em Projeto de Controladores para Sistemas Dinâmicos Não Lineares a partir de Estratégias Adaptativas. Entusiasta da Indústria 4.0, possui experiência na elaboração de projetos elétricos, automação industrial e residencial, controle de processos, análise e certificação de projetos eólicos e fotovoltaicos, inspeção e auditoria predial e eficiência energética. Também foi Diretor Geral no Instituto de Tecnologia, Educação, Cultura e Ciência (ITECCI) e Diretor Executivo do Grupo LIDAAE, empresa atuante nos segmentos de engenharia e consultoria. Hoje atua como consultor em processos de automação industrial, sistemas FV e ministra cursos e palestras nas áreas de Engenharia, Automação e Computação.",
+            "date_created": "2023-10-20T13:05:25.772Z"
+        }
+    },
+    {
+        "model": "events.events",
+        "pk": 19,
+        "fields": {
+            "title": "Computação em Nuvem",
+            "host": "Luiz Stephany Filho do Huawei Club Unifor",
+            "category": "minicurso",
+            "number_of_inscriptions": 0,
+            "max_number_of_inscriptions": 16,
+            "date": {
+                "0": {
+                    "start": "2023-11-08T15:30",
+                    "end": "2023-11-08T18:00"
+                }
+            },
+            "description": "Este curso foca nos conceitos básicos da Computação em Nuvem. Você aprenderá sobre a definição, origem, características e modelos de implantação da Computação em Nuvem. A arquitetura da nuvem e duas tendências também serão apresentadas. Luiz Stephany Filho é doutor em Administração pela UECE com estudos avançados na AUT-Nova Zelândia e FGV, especialista em Gig-Economia, clusters industriais e inovação. Coordenador do TEC Unifor com 15 anos de experiência em transformação digital, docência, e implementação de projetos.",
+            "date_created": "2023-10-20T13:11:33.589Z"
+        }
+    },
+    {
+        "model": "events.events",
+        "pk": 20,
+        "fields": {
+            "title": "Programação em ESP-32 para Automação Residencial",
+            "host": "Bruno Ranieri da Autocore",
+            "category": "workshop",
+            "number_of_inscriptions": 0,
+            "max_number_of_inscriptions": 16,
+            "date": {
+                "0": {
+                    "start": "2023-11-09T14:00",
+                    "end": "2023-11-09T17:00"
+                }
+            },
+            "description": "Bruno Raniere é formado em Mecatrônica Industrial pelo IFCE. Trabalha desde 2008 com sistemas embarcados programando microcontroladores 8051, PIC, ARM e mais recentemente ATMEGA e ESP32 através da plataforma Arduino. É projetista de Hardware com dezenas de placas desenvolvidas, incluindo as placas exclusivas da Autocore Robótica. Também tem experiência como professor em escolas técnicas e profissionalizantes. Apresenta o canal do Youtube Bruno Raniere - Projetos Eletrônicos. A ideia de criar a AutoCore surgiu em uma conversa entre amigos de trabalho em Março de 2014, onde foi discutida a dificuldade em se encontrar peças de eletrônica e robótica em Fortaleza e no Nordeste de um modo geral. Cinco meses depois, estava inaugurada a loja virtual, com o objetivo de tornar mais fácil a vida de estudantes, entusiastas e profissionais da área alocados na região.",
+            "date_created": "2023-10-20T13:22:38.849Z"
+        }
+    },
+    {
+        "model": "events.events",
+        "pk": 21,
+        "fields": {
+            "title": "Introdução ao Desenvolvimento para iOS com Swift",
+            "host": "Yohanne Moreira da Apple Academy",
+            "category": "workshop",
+            "number_of_inscriptions": 0,
+            "max_number_of_inscriptions": 21,
+            "date": {
+                "0": {
+                    "start": "2023-11-08T13:30",
+                    "end": "2023-11-08T15:30"
+                },
+                "1": {
+                    "start": "2023-11-09T13:30",
+                    "end": "2023-11-09T15:00"
+                }
+            },
+            "description": "O workshop será uma jornada imersiva para aqueles que desejam conhecer quais os primeiros passos no desenvolvimento de aplicativos para iOS. O objetivo principal é capacitar os participantes com os conceitos básicos da linguagem de programação Swift e da estrutura de interface de usuário SwiftUI, proporcionando as habilidades fundamentais necessárias para criar aplicações para o ecossistema Apple funcionais e atraentes.  Yohanne Moreira é graduanda em Engenharia de Computação pela Universidade Federal do Ceará e faz parte da Residência em Desenvolvimento Mobile da Apple Academy no Instituto Federal do Ceará - Campus Fortaleza. No grupo, são desenvolvidos projetos de aplicações para o ecossistema iOS sob demanda para empresas utilizando SwiftUI.",
+            "date_created": "2023-10-20T13:30:23.507Z"
+        }
+    },
+    {
+        "model": "events.events",
+        "pk": 22,
+        "fields": {
+            "title": "Controle Competitivo",
+            "host": "Fabrício Nogueira",
+            "category": "palestra",
+            "number_of_inscriptions": 0,
+            "max_number_of_inscriptions": 115,
+            "date": {
+                "0": {
+                    "start": "2023-11-10T09:00",
+                    "end": "2023-11-10T10:30"
+                }
+            },
+            "description": "Fabrício Nogueira possui graduação em Engenharia da Computação (2007), mestrado e doutorado em Engenharia Elétrica (2008 e 2012), ambos pela Universidade Federal do Pará (UFPA). Desde 2013 é professor associado do Departamento de Engenharia Elétrica da Universidade Federal do Ceará (UFC) - Campus Fortaleza, onde realiza pesquisa e leciona disciplinas na área de sistemas de controle. É membro permanente do Programa de Pós Graduação em Engenharia Elétrica (PPGEE/UFC) da UFC, onde orienta alunos de mestrado e doutorado e já atuou como vice-coordenador (2015-2019) e coordenador (2019 a 2023). É coordenador do Grupo de Pesquisa em Automação, Controle e Robótica - GPAR/UFC. Possui experiência no desenvolvimento de projetos de Pesquisa e Desenvolvimento (PD) com empresas do setor elétrico brasileiro e indústria, com ênfase na proposição de soluções de automação, controle e monitoramento de plantas industriais e de geração de energia. As áreas de interesse em pesquisa incluem: controle digital, adaptativo e robusto, modelagem e controle de sistemas LPV; identificação de sistemas; com aplicações em sistemas elétricos de potência, robótica, sistemas biomédicos e diferentes sistemas industriais. É membro do conselho superior da Sociedade Brasileira de Automática-SBA (2023-2024) e presidente do Comitê Editorial de Eventos da SBA (2023-2024). Foi coordenador geral do XXIV Congresso Brasileiro de Automática - CBA 2022 e participou em 2013 da coordenação do XI Simpósio Brasileiro de Automação Inteligente (SBAI), eventos promovidos pela SBA. É membro do conselho superior (board of governors - BOG) da Sociedade de Sistemas de Controle (Control Systems Society) do IEEE, com mandato (2023-2024).",
+            "date_created": "2023-10-20T13:33:20.365Z"
+        }
+    },
+    {
+        "model": "events.events",
+        "pk": 23,
+        "fields": {
+            "title": "Introdução à Ciência de Dados com Machine Learning",
+            "host": "Luan Brasil",
+            "category": "workshop",
+            "number_of_inscriptions": 0,
+            "max_number_of_inscriptions": 23,
+            "date": {
+                "0": {
+                    "start": "2023-11-10T13:30",
+                    "end": "2023-11-10T15:30"
+                }
+            },
+            "description": "Neste workshop, iremos trabalhar com o desenvolvimento de um modelo de Machine Learning abordando os principais pontos de um processo de ciência de dados, trabalhando o entendimento do problema, análise e processamento dos dados, e finalizando com treinamento e avaliação do modelo. Serão abordadas as principais técnicas de análise de dados, os modelos de Machine Learning mais utilizados, assim como as principais métricas de avaliações desses modelos. Luan Brasil é Cientista de Dados e Engenheiro de Machine Learning há mais de 5 anos. Atualmente, atua como Cientista de Dados no Grupo JCPM oi, onde desenvolve produtos de dados com foco em Inteligência Artificial preditiva e generativa. Na universidade, desenvolveu pesquisas voltadas ao uso de Inteligência Artificial para previsibilidade de morte súbita em pacientes com Doença de Chagas a partir da análise de dados clínicos e exames de eletrocardiograma.",
+            "date_created": "2023-10-20T13:35:54.321Z"
+        }
+    },
+    {
+        "model": "events.events",
+        "pk": 24,
+        "fields": {
+            "title": "Encerramento Tecnovetti$patrocinador",
+            "host": "Tecnovetti",
+            "category": "palestra",
+            "number_of_inscriptions": 0,
+            "max_number_of_inscriptions": 115,
+            "date": {
+                "0": {
+                    "start": "2023-11-10T16:00",
+                    "end": "2023-11-10T18:00"
+                }
+            },
+            "description": "Encerramento da SEELECT 2023",
+            "date_created": "2023-10-20T13:54:45.539Z"
+        }
+    },
+    {
+        "model": "events.events",
+        "pk": 25,
+        "fields": {
+            "title": "ABERTURA GAUDIUM$patrocinador",
+            "host": "Bruno Muniz e Ricardo Góes",
+            "category": "palestra",
+            "number_of_inscriptions": 0,
+            "max_number_of_inscriptions": 115,
+            "date": {
+                "0": {
+                    "start": "2023-11-06T09:00",
+                    "end": "2023-11-06T11:00"
+                }
+            },
+            "description": "Bruno Muniz é formado em Ciência da Computação (UECE) e Mestre em Informática (PUC-Rio). Teve seu primeiro contato com tecnologia aos 10 anos de idade e desde então nunca mais parou. Está no espírito e no sangue construir soluções tecnológicas práticas para resolver as dores das pessoas e empresas. Transita bem como líder multiplicador de propósito e cultura, e também em diferentes áreas como Estratégia, Vendas, Marketing, Produto, Programação e Infraestrutura. Ricardo Góes é engenheiro formado pelo IME (Instituto Militar de Engenharia) com MBA em Gestão Estratégica de Tecnologia da Informação pela UFRJ. PMP (Project Management Professional) desde 2008 com mais de 20 anos de experiência em gerenciamento de projetos de alto risco e complexidade.",
+            "date_created": "2023-10-19T18:57:20.927Z"
+        }
+    },
+    {
         "model": "events.eventsplaces",
         "pk": 1,
         "fields": {
             "event": 1,
-            "place": 1
+            "place": 3
         }
     },
     {
@@ -396,7 +606,7 @@
         "pk": 2,
         "fields": {
             "event": 2,
-            "place": 3
+            "place": 2
         }
     },
     {
@@ -404,7 +614,7 @@
         "pk": 3,
         "fields": {
             "event": 3,
-            "place": 2
+            "place": 1
         }
     },
     {
@@ -420,7 +630,7 @@
         "pk": 5,
         "fields": {
             "event": 5,
-            "place": 1
+            "place": 2
         }
     },
     {
@@ -428,7 +638,7 @@
         "pk": 6,
         "fields": {
             "event": 6,
-            "place": 2
+            "place": 1
         }
     },
     {
@@ -436,7 +646,7 @@
         "pk": 7,
         "fields": {
             "event": 7,
-            "place": 1
+            "place": 2
         }
     },
     {
@@ -444,7 +654,7 @@
         "pk": 8,
         "fields": {
             "event": 8,
-            "place": 2
+            "place": 6
         }
     },
     {
@@ -452,7 +662,7 @@
         "pk": 9,
         "fields": {
             "event": 9,
-            "place": 6
+            "place": 1
         }
     },
     {
@@ -468,7 +678,7 @@
         "pk": 11,
         "fields": {
             "event": 11,
-            "place": 1
+            "place": 2
         }
     },
     {
@@ -484,7 +694,7 @@
         "pk": 13,
         "fields": {
             "event": 13,
-            "place": 2
+            "place": 1
         }
     },
     {
@@ -492,6 +702,94 @@
         "pk": 14,
         "fields": {
             "event": 14,
+            "place": 5
+        }
+    },
+    {
+        "model": "events.eventsplaces",
+        "pk": 15,
+        "fields": {
+            "event": 15,
+            "place": 6
+        }
+    },
+    {
+        "model": "events.eventsplaces",
+        "pk": 16,
+        "fields": {
+            "event": 16,
+            "place": 6
+        }
+    },
+    {
+        "model": "events.eventsplaces",
+        "pk": 17,
+        "fields": {
+            "event": 17,
+            "place": 6
+        }
+    },
+    {
+        "model": "events.eventsplaces",
+        "pk": 18,
+        "fields": {
+            "event": 18,
+            "place": 5
+        }
+    },
+    {
+        "model": "events.eventsplaces",
+        "pk": 19,
+        "fields": {
+            "event": 19,
+            "place": 6
+        }
+    },
+    {
+        "model": "events.eventsplaces",
+        "pk": 20,
+        "fields": {
+            "event": 20,
+            "place": 6
+        }
+    },
+    {
+        "model": "events.eventsplaces",
+        "pk": 21,
+        "fields": {
+            "event": 21,
+            "place": 9
+        }
+    },
+    {
+        "model": "events.eventsplaces",
+        "pk": 22,
+        "fields": {
+            "event": 22,
+            "place": 1
+        }
+    },
+    {
+        "model": "events.eventsplaces",
+        "pk": 23,
+        "fields": {
+            "event": 23,
+            "place": 5
+        }
+    },
+    {
+        "model": "events.eventsplaces",
+        "pk": 24,
+        "fields": {
+            "event": 24,
+            "place": 1
+        }
+    },
+    {
+        "model": "events.eventsplaces",
+        "pk": 25,
+        "fields": {
+            "event": 25,
             "place": 1
         }
     }
