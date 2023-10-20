@@ -24,6 +24,7 @@ class KitModels(models.Model):
 # Model for kits informations.
 class Kits(models.Model):
     user = models.OneToOneField(UserProfile, on_delete=models.CASCADE, null=True, blank=False)
+    discount = models.IntegerField(blank=True, default=0)
     is_payed = models.BooleanField(blank=False, default=False)
     model = models.ForeignKey(KitModels, on_delete=models.CASCADE, null=False, blank=False, default=1)
     events = models.ManyToManyField(Events, through='KitsEvents')
@@ -34,5 +35,11 @@ class Kits(models.Model):
 class KitsEvents(models.Model):
     kit = models.ForeignKey(Kits, on_delete=models.CASCADE)
     event = models.ForeignKey(Events, on_delete=models.CASCADE)
+
+###########################################################################################
+# Discount
+class KitsDiscount(models.Model):
+    discount = models.IntegerField(blank=True, default=0)
+    email = models.EmailField(max_length=512, unique=True)
 
 ###########################################################################################

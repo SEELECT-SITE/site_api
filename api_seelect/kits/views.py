@@ -11,12 +11,13 @@ from rest_framework.pagination import PageNumberPagination
 
 from events.serializers import *
 from kits.serializers import *
+from users.serializers import *
 
 ###########################################################################################
 # Pagination Classes                                                                      #
 ###########################################################################################
 class StandardUserSetPagination(PageNumberPagination):
-    page_size = 10
+    page_size = 100
     page_size_query_param = 'page_size'
     max_page_size = 1000
 
@@ -62,6 +63,19 @@ class KitsList(APIView, StandardUserSetPagination):
         except KitModels.DoesNotExist:
             return Response({"error": "Kit Model with ID {} does not exist.".format(model_id)}, status=status.HTTP_404_NOT_FOUND)
                 
+        # Getting user object to get the email
+        try:
+            user = User.objects.get(pk=user_id)
+        except User.DoesNotExist:
+            return Response({"error": "User with ID {} does not exist.".format(user_id)}, status=status.HTTP_404_NOT_FOUND)
+        
+        # Check if the email have some discount.
+        try:
+            discount = KitsDiscount.objects.get(email=user.email)
+            kits_data['discount'] = discount.discount
+        except KitsDiscount.DoesNotExist:
+            kits_data['discount'] = 0
+        
         serializer = KitsSerializer(data=kits_data)
 
         if serializer.is_valid():
@@ -104,8 +118,18 @@ class KitsDetail(APIView):
         kit = self.get_object(pk)
         
         kits_data = request.data.copy()
+        # Getting events
         events_data = kits_data.pop('events', [])
-
+        
+        # Removing fields which you shouldn't change there.
+        kits_data.pop('user')
+        kits_data.pop('discount')
+        kits_data.pop('is_payed')
+        
+        # If the payements was done, you can't change the model.
+        if kit.is_payed:
+            kits_data.pop('model')
+                
         kits_serializer = KitsSerializer(kit, data=kits_data)
 
         if kits_serializer.is_valid():
@@ -213,6 +237,71 @@ class KitsModelsDetail(APIView):
         model.delete()
         
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+###########################################################################################
+# .../api/kits/discount/
+class KitsDiscountList(APIView, StandardUserSetPagination):
+    """
+    List all kits discounts, or create a new kit discount.
+    """
+    pagination_class = StandardUserSetPagination
+
+    def get(self, request, format=None):    
+        queryset = KitsDiscount.objects.get_queryset().order_by('id')
+        
+        page = self.paginate_queryset(queryset, request)
+
+        if page is not None:
+            serializer = KitsDiscountSerializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = KitsDiscount(queryset, many=True)
+        return Response(serializer.data)
+    
+    def post(self, request, format=None):
+        serializer = KitsDiscountSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)   
+
+###########################################################################################
+# .../api/kits/discout/<id>
+class KitsDiscountDetail(APIView):
+    """
+    Retrieve, update or delete a kit discount instance.
+    """
+    def get_object(self, pk):
+        # Getting the kit discount by id.
+        try:
+            return KitsDiscount.objects.get(pk=pk)
+        # Return 404 if the kit discount don't exist.
+        except KitsDiscount.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        discount = self.get_object(pk)
+        serializer = KitsDiscountSerializer(discount)
+        return Response(serializer.data)
+    
+    def put(self, request, pk, format=None):
+        discount = self.get_object(pk)
+
+        serializer = KitsDiscountSerializer(discount, data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  
+    
+    def delete(self, request, pk, format=None):
+        discount = self.get_object(pk)
+        discount.delete()
+        
+        return Response(status=status.HTTP_204_NO_CONTENT)
     
 ###########################################################################################
 # .../api/kits/<id>/confirm_payement/
@@ -229,7 +318,31 @@ def confirm_payement(request, pk):
     except Kits.DoesNotExist:
         raise Http404
     
-    kit.is_payed = True
+    # Updating is_payed value or let the old value.
+    kit.is_payed = request.data.get('is_payed', kit.is_payed)
+    kit.save()
+    
+    serializer = KitsSerializer(kit)
+    
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+###########################################################################################
+# .../api/kits/<id>/confirm_payement/
+@api_view(['POST'])
+def change_discount(request, pk):
+    """
+    Change discount value.
+    """
+
+    # Getting the event by id.
+    try:
+        kit = Kits.objects.get(pk=pk)
+    # Return 404 if the event don't exist.
+    except Kits.DoesNotExist:
+        raise Http404
+    
+    # Updating is_payed value or let the old value.
+    kit.discount = request.data.get('discount', kit.discount)
     kit.save()
     
     serializer = KitsSerializer(kit)

@@ -13,7 +13,7 @@ class Places(models.Model):
     location = models.CharField(max_length=64, blank=True)
     url_location = models.CharField(max_length=1024, )
     capacity = models.PositiveIntegerField(validators=[MaxValueValidator(100000)], blank=False, null=False)
-    equipaments = models.CharField(max_length=4096, blank=True, null=False)
+    equipaments = models.TextField(blank=True, null=False)
     date_created = models.DateTimeField(default=timezone.now)
 
 ###########################################################################################

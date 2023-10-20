@@ -12,7 +12,7 @@ from django.core.validators import MaxValueValidator
 # Model for user informations.
 class User(models.Model): 
     role = models.CharField(max_length=64, blank=False, null=False, default='user')
-    email = models.EmailField(max_length=256, unique=True)
+    email = models.EmailField(max_length=512, unique=True)
     password = models.CharField(max_length=256, unique=True, null=False, blank=False)
     date_joined = models.DateTimeField(default=timezone.now)
 

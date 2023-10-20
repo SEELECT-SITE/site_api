@@ -14,3 +14,5 @@ class Contact(models.Model):
     phone = models.CharField(max_length=16)
     message = models.CharField(max_length=1024)
     date = models.DateTimeField(default=timezone.now)
+    
+###########################################################################################

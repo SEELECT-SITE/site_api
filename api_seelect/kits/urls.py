@@ -13,6 +13,12 @@ urlpatterns = [
     path('models/<int:pk>/', views.KitsModelsDetail.as_view(), name='kits-models-detail'),
     # Requesto to confirm payement
     path('<int:pk>/confirm_payement/', views.confirm_payement, name='kits-confirm-payement'),
+    # Request to get all kits discounts.
+    path('discount/', views.KitsDiscountList.as_view(), name='kits-discount-list'),
+    # Request to get specific kit discount by id.
+    path('discount/<int:pk>/', views.KitsDiscountDetail.as_view(), name='kits-discount-detail'),
+    # Requesto to change the discount of the kit.   
+    path('<int:pk>/change_discount/', views.change_discount, name='kits-change-discount'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

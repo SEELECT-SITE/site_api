@@ -36,9 +36,7 @@ def register(request):
     Register a new user.
     """
     # Getting user data.
-    email = request.POST.get('email', None)
-    print(request.data)
-    print(request.POST.get('password', None))     
+    email = request.POST.get('email', None)    
 
     # Creating hash and salt
     password_salt = generateRandomSalt()
@@ -117,3 +115,5 @@ def login(request):
     
     # Returning the json data of the user
     return Response(data)
+
+###########################################################################################

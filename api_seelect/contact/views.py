@@ -2,9 +2,6 @@
 # Imports                                                                                 #
 ###########################################################################################
 from django.http import Http404
-from django.utils import timezone
-from django.contrib.auth.hashers import make_password
-
 
 from rest_framework.views import APIView
 from rest_framework.response import Response

@@ -4,19 +4,21 @@
 from django.http import Http404
 
 from rest_framework.views import APIView
+from rest_framework.decorators import api_view
+
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.pagination import PageNumberPagination
 
 from events.serializers import *
 from kits.serializers import KitsEventsSerializer, KitsEvents
-from users.serializers import UserProfileResumedSerializer
+from users.serializers import UserProfileResumedSerializer, User
 
 ###########################################################################################
 # Pagination Classes                                                                      #
-###########################################################################################
-class StandardUserSetPagination(PageNumberPagination):
-    page_size = 10
+###########################################################################################    
+class StandardEventSetPagination(PageNumberPagination):
+    page_size = 1000
     page_size_query_param = 'page_size'
     max_page_size = 1000
 
@@ -24,11 +26,11 @@ class StandardUserSetPagination(PageNumberPagination):
 # Requests Classes                                                                        #
 ###########################################################################################
 # .../api/events/
-class EventsList(APIView, StandardUserSetPagination):
+class EventsList(APIView, StandardEventSetPagination):
     """
     List all events, or create a new event.
     """
-    pagination_class = StandardUserSetPagination
+    pagination_class = StandardEventSetPagination
 
     def get(self, request, format=None):    
         queryset = Events.objects.get_queryset().order_by('id')
@@ -129,11 +131,11 @@ class EventsDetail(APIView):
     
 ###########################################################################################
 # .../api/events/places/
-class PlacesList(APIView, StandardUserSetPagination):
+class PlacesList(APIView, StandardEventSetPagination):
     """
     List all places, or create a new place.
     """
-    pagination_class = StandardUserSetPagination
+    pagination_class = StandardEventSetPagination
 
     def get(self, request, format=None):    
         queryset = Places.objects.get_queryset().order_by('id')
@@ -188,5 +190,30 @@ class PlacesDetail(APIView):
         place.delete()
         
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+###########################################################################################
+# .../api/events/<id>/participants/
+@api_view(['GET'])
+def get_participants_list(request, pk):
+    """
+    Get participants list by event.
+    """
+            
+    query = KitsEvents.objects.all().filter(event=pk)
+    
+    # Creating array
+    participants = "id,name,email\r"
+    
+    # Getting all kits that are related with this event
+    for element in KitsEventsSerializer(query, many=True).data:
+        
+        kit = Kits.objects.get(pk=element['kit'])            
+        
+        profile_serializer = UserProfileResumedSerializer(kit.user)
+        user = User.objects.get(pk=kit.user.id)
+        
+        participants += f"{profile_serializer.data['id']},{profile_serializer.data['name']},{user.email}\r"
+    
+    return Response(participants)
 
 ###########################################################################################

@@ -1,0 +1,50 @@
+[
+    {
+        "model": "kits.kitmodels",
+        "pk": 1,
+        "fields": {
+            "model": "Kit Gratuito",
+            "price": 0,
+            "all_speeches": false,
+            "workshops": 0,
+            "bucks_coup": false,
+            "description": ""
+        }
+    },
+    {
+        "model": "kits.kitmodels",
+        "pk": 2,
+        "fields": {
+            "model": "Kit Básico",
+            "price": 10,
+            "all_speeches": true,
+            "workshops": 1,
+            "bucks_coup": false,
+            "description": ""
+        }
+    },
+    {
+        "model": "kits.kitmodels",
+        "pk": 3,
+        "fields": {
+            "model": "Kit Médio",
+            "price": 20,
+            "all_speeches": true,
+            "workshops": 3,
+            "bucks_coup": true,
+            "description": ""
+        }
+    },
+    {
+        "model": "kits.kitmodels",
+        "pk": 4,
+        "fields": {
+            "model": "Kit Premium",
+            "price": 25,
+            "all_speeches": true,
+            "workshops": 4,
+            "bucks_coup": true,
+            "description": ""
+        }
+    }
+]

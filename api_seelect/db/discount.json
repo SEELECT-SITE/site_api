@@ -1,0 +1,210 @@
+[
+    {
+        "model": "kits.kitsdiscount",
+        "pk": 0,
+        "fields": {
+            "discount": 10,
+            "email": "alissonjsb4@gmail.com"
+        }
+    },
+    {
+        "model": "kits.kitsdiscount",
+        "pk": 1,
+        "fields": {
+            "discount": 10,
+            "email": "caius.carneiro@gmail.com"
+        }
+    },
+    {
+        "model": "kits.kitsdiscount",
+        "pk": 2,
+        "fields": {
+            "discount": 10,
+            "email": "daviqueiroz2002@alu.ufc.br"
+        }
+    },
+    {
+        "model": "kits.kitsdiscount",
+        "pk": 3,
+        "fields": {
+            "discount": 10,
+            "email": "guilhermeslandrade@alu.ufc.br"
+        }
+    },
+    {
+        "model": "kits.kitsdiscount",
+        "pk": 4,
+        "fields": {
+            "discount": 10,
+            "email": "jannybarroso@alu.ufc.br"
+        }
+    },
+    {
+        "model": "kits.kitsdiscount",
+        "pk": 5,
+        "fields": {
+            "discount": 10,
+            "email": "leticiarneri@alu.ufc.br"
+        }
+    },
+    {
+        "model": "kits.kitsdiscount",
+        "pk": 6,
+        "fields": {
+            "discount": 10,
+            "email": "luiza.aaraujo@alu.ufc.br"
+        }
+    },
+    {
+        "model": "kits.kitsdiscount",
+        "pk": 7,
+        "fields": {
+            "discount": 10,
+            "email": "rodrigohiury@alu.ufc.br"
+        }
+    },
+    {
+        "model": "kits.kitsdiscount",
+        "pk": 8,
+        "fields": {
+            "discount": 10,
+            "email": "verivini05@gmail.com"
+        }
+    },
+    {
+        "model": "kits.kitsdiscount",
+        "pk": 9,
+        "fields": {
+            "discount": 15,
+            "email": "alexandreferreira@alu.ufc.br"
+        }
+    },
+    {
+        "model": "kits.kitsdiscount",
+        "pk": 10,
+        "fields": {
+            "discount": 15,
+            "email": "caiodiniz@alu.ufc.br"
+        }
+    },
+    {
+        "model": "kits.kitsdiscount",
+        "pk": 11,
+        "fields": {
+            "discount": 15,
+            "email": "dl083281@gmail.com"
+        }
+    },
+    {
+        "model": "kits.kitsdiscount",
+        "pk": 12,
+        "fields": {
+            "discount": 15,
+            "email": "filipekaetano04@gmail.com"
+        }
+    },
+    {
+        "model": "kits.kitsdiscount",
+        "pk": 13,
+        "fields": {
+            "discount": 15,
+            "email": "italoguedes@alu.ufc.br"
+        }
+    },
+    {
+        "model": "kits.kitsdiscount",
+        "pk": 14,
+        "fields": {
+            "discount": 15,
+            "email": "italosouza@alu.ufc.br"
+        }
+    },
+    {
+        "model": "kits.kitsdiscount",
+        "pk": 15,
+        "fields": {
+            "discount": 15,
+            "email": "jubarreira@alu.ufc.br"
+        }
+    },
+    {
+        "model": "kits.kitsdiscount",
+        "pk": 16,
+        "fields": {
+            "discount": 15,
+            "email": "mcarneiro@alu.ufc.br"
+        }
+    },
+    {
+        "model": "kits.kitsdiscount",
+        "pk": 17,
+        "fields": {
+            "discount": 15,
+            "email": "nicolas.botelho@alu.ufc.br"
+        }
+    },
+    {
+        "model": "kits.kitsdiscount",
+        "pk": 18,
+        "fields": {
+            "discount": 15,
+            "email": "renatox45@gmail.com"
+        }
+    },
+    {
+        "model": "kits.kitsdiscount",
+        "pk": 19,
+        "fields": {
+            "discount": 20,
+            "email": "danichaves11@gmail.com"
+        }
+    },
+    {
+        "model": "kits.kitsdiscount",
+        "pk": 20,
+        "fields": {
+            "discount": 20,
+            "email": "isabely.costa@alu.ufc.br"
+        }
+    },
+    {
+        "model": "kits.kitsdiscount",
+        "pk": 21,
+        "fields": {
+            "discount": 20,
+            "email": "israelfernandesisf@gmail.com"
+        }
+    },
+    {
+        "model": "kits.kitsdiscount",
+        "pk": 22,
+        "fields": {
+            "discount": 20,
+            "email": "leticia.alves@alu.ufc.br"
+        }
+    },
+    {
+        "model": "kits.kitsdiscount",
+        "pk": 23,
+        "fields": {
+            "discount": 20,
+            "email": "marcellorcdo@gmail.com"
+        }
+    },
+    {
+        "model": "kits.kitsdiscount",
+        "pk": 24,
+        "fields": {
+            "discount": 20,
+            "email": "leticia.ciconini@gmail.com"
+        }
+    },
+    {
+        "model": "kits.kitsdiscount",
+        "pk": 25,
+        "fields": {
+            "discount": 20,
+            "email": "mariodaniel@alu.ufc.br"
+        }
+    }
+]

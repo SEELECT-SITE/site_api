@@ -1,0 +1,498 @@
+[
+    {
+        "model": "events.places",
+        "pk": 1,
+        "fields": {
+            "location": "Auditório DETI",
+            "url_location": "https://maps.app.goo.gl/GhLkwQtK3Er9cQcP7",
+            "capacity": 115,
+            "equipaments": "",
+            "date_created": "2023-10-19T16:03:35.677Z"
+        }
+    },
+    {
+        "model": "events.places",
+        "pk": 2,
+        "fields": {
+            "location": "Auditório LESC",
+            "url_location": "https://maps.app.goo.gl/oxtQmocuVG4uGceF7",
+            "capacity": 75,
+            "equipaments": "",
+            "date_created": "2023-10-19T16:05:46.890Z"
+        }
+    },
+    {
+        "model": "events.places",
+        "pk": 3,
+        "fields": {
+            "location": "DETI - Sala de seminários 1",
+            "url_location": "https://maps.app.goo.gl/GhLkwQtK3Er9cQcP7",
+            "capacity": 27,
+            "equipaments": "",
+            "date_created": "2023-10-19T16:07:19.730Z"
+        }
+    },
+    {
+        "model": "events.places",
+        "pk": 4,
+        "fields": {
+            "location": "DETI - Sala de seminários 2",
+            "url_location": "https://maps.app.goo.gl/GhLkwQtK3Er9cQcP7",
+            "capacity": 27,
+            "equipaments": "",
+            "date_created": "2023-10-19T16:08:11.566Z"
+        }
+    },
+    {
+        "model": "events.places",
+        "pk": 5,
+        "fields": {
+            "location": "DETI - Laboratório de informática I",
+            "url_location": "https://maps.app.goo.gl/GhLkwQtK3Er9cQcP7",
+            "capacity": 23,
+            "equipaments": "",
+            "date_created": "2023-10-19T16:10:19.290Z"
+        }
+    },
+    {
+        "model": "events.places",
+        "pk": 6,
+        "fields": {
+            "location": "DETI - Laboratório de informática II",
+            "url_location": "https://maps.app.goo.gl/GhLkwQtK3Er9cQcP7",
+            "capacity": 16,
+            "equipaments": "",
+            "date_created": "2023-10-19T16:10:49.731Z"
+        }
+    },
+    {
+        "model": "events.places",
+        "pk": 7,
+        "fields": {
+            "location": "DETI - Laboratório 3",
+            "url_location": "https://maps.app.goo.gl/GhLkwQtK3Er9cQcP7",
+            "capacity": 8,
+            "equipaments": "",
+            "date_created": "2023-10-19T16:13:11.487Z"
+        }
+    },
+    {
+        "model": "events.places",
+        "pk": 8,
+        "fields": {
+            "location": "DETI - Laboratório 4",
+            "url_location": "https://maps.app.goo.gl/GhLkwQtK3Er9cQcP7",
+            "capacity": 10,
+            "equipaments": "",
+            "date_created": "2023-10-19T16:14:07.063Z"
+        }
+    },
+    {
+        "model": "events.places",
+        "pk": 9,
+        "fields": {
+            "location": "Auditório DETI",
+            "url_location": "https://maps.app.goo.gl/GhLkwQtK3Er9cQcP7",
+            "capacity": 115,
+            "equipaments": "",
+            "date_created": "2023-10-19T17:42:53.968Z"
+        }
+    },
+    {
+        "model": "events.places",
+        "pk": 10,
+        "fields": {
+            "location": "Auditório DETI",
+            "url_location": "https://maps.app.goo.gl/GhLkwQtK3Er9cQcP7",
+            "capacity": 115,
+            "equipaments": "",
+            "date_created": "2023-10-19T17:43:51.604Z"
+        }
+    },
+    {
+        "model": "events.events",
+        "pk": 1,
+        "fields": {
+            "title": "ABERTURA GAUDIUM$patrocinador",
+            "host": "Bruno Muniz e Ricardo Góes",
+            "category": "palestra",
+            "number_of_inscriptions": 0,
+            "max_number_of_inscriptions": 115,
+            "date": {
+                "0": {
+                    "start": "2023-11-06T09:00",
+                    "end": "2023-11-06T11:00"
+                }
+            },
+            "description": "Bruno Muniz é formado em Ciência da Computação (UECE) e Mestre em Informática (PUC-Rio). Teve seu primeiro contato com tecnologia aos 10 anos de idade e desde então nunca mais parou. Está no espírito e no sangue construir soluções tecnológicas práticas para resolver as dores das pessoas e empresas. Transita bem como líder multiplicador de propósito e cultura, e também em diferentes áreas como Estratégia, Vendas, Marketing, Produto, Programação e Infraestrutura. Ricardo Góes é engenheiro formado pelo IME (Instituto Militar de Engenharia) com MBA em Gestão Estratégica de Tecnologia da Informação pela UFRJ. PMP (Project Management Professional) desde 2008 com mais de 20 anos de experiência em gerenciamento de projetos de alto risco e complexidade.",
+            "date_created": "2023-10-19T18:57:20.927Z"
+        }
+    },
+    {
+        "model": "events.events",
+        "pk": 2,
+        "fields": {
+            "title": "Gerenciamento Ágil na Prática",
+            "host": "Normalabs",
+            "category": "workshop",
+            "number_of_inscriptions": 0,
+            "max_number_of_inscriptions": 27,
+            "date": {
+                "0": {
+                    "start": "2023-11-06T13:30",
+                    "end": "2023-11-06T15:30"
+                }
+            },
+            "description": "O workshop se trata de uma dinâmica realizada nos processos seletivos da empresa, que coloca em prova as habilidades dos participantes em relação ao mundo dos negócios e da tecnologia.  A Normalabs é o hub de inovação digital da Normatel e foi criada em 2021 com o intuito de impulsionar a organização com a transformação digital. Seu grande princípio é a união entre o trabalho em equipe e as metodologias ágeis que permitem a equipe a possibilidade de realizar projetos inovadores de forma coerente e rápida.",
+            "date_created": "2023-10-19T18:59:19.401Z"
+        }
+    },
+    {
+        "model": "events.events",
+        "pk": 3,
+        "fields": {
+            "title": "Trilhando o Caminho da Segurança da Informação",
+            "host": "Murilo Cirino Nogueira da Network Secure",
+            "category": "palestra",
+            "number_of_inscriptions": 0,
+            "max_number_of_inscriptions": 75,
+            "date": {
+                "0": {
+                    "start": "2023-11-07T09:00",
+                    "end": "2023-11-07T10:30"
+                }
+            },
+            "description": "Vamos explorar a trajetória de Murilo Cirino, CEO de uma das principais empresas de segurança da informação no Nordeste. Murilo irá compartilhar sua experiência, seus insights e aprendizados ao longo de sua carreira na área de segurança da informação. Na palestra, serão discutidos os passos para ingressar com sucesso nessa carreira desafiadora. Ele compartilhará dicas valiosas, caminhos a serem seguidos e até mesmo as lições aprendidas com seus próprios arrependimentos ao longo do caminho. Esta é uma oportunidade imperdível para aspirantes a profissionais de segurança da informação e entusiastas da tecnologia que buscam orientações diretas de um líder de destaque no setor. Junte-se a nós para uma palestra enriquecedora que pode ser o ponto de partida para a sua carreira na segurança cibernética e descubra os segredos para alcançar o sucesso na área. Murilo Cirino é empresário no ramo de segurança da informação e CEO da Network Secure, além de possuir certificações como CISSP e Comptia Securiy+. Fundada em 2002, a Network Secure é uma empresa especializada em segurança da informação e cibersegurança. Com profissionais altamente treinados e certificados, atua em todo o Brasil, prezando sempre pela excelência do atendimento e entrega de seus produtos e serviços. A empresa é uma das principais referências em cibersegurança, com premiações de grandes players de mercado além do reconhecimento em satisfação de seus clientes e parceiros.",
+            "date_created": "2023-10-19T19:10:39.002Z"
+        }
+    },
+    {
+        "model": "events.events",
+        "pk": 4,
+        "fields": {
+            "title": "Projetos em Engenharia Elétrica",
+            "host": "Henrique Tavares da Pulso Engenharia",
+            "category": "palestra",
+            "number_of_inscriptions": 0,
+            "max_number_of_inscriptions": 115,
+            "date": {
+                "0": {
+                    "start": "2023-11-07T09:00",
+                    "end": "2023-11-07T10:30"
+                }
+            },
+            "description": "Henrique Tavares é um Engenheiro Eletricista formado pela Universidade de Fortaleza (Unifor) em 2000 e Mestre em Energia pela Universidade de São Paulo (USP) em 2008, que está atualmente em fase de Doutorado em Gestão de Empresas pela Laureate Liverpool no Reino Unido, consolidando sua reputação como pesquisador e analista de tendências no mundo dos negócios. Seu foco central tem sido orientar profissionais de sua área a prosperar no mercado, utilizando mentoria e estratégias desenvolvidas a partir de suas ricas experiências ao longo de sua jornada, auxiliando muitos engenheiros que, embora formados, não conseguiam se estabelecer na área. Graças a seu apoio e orientação, esses profissionais hoje trilham um brilhante caminho no mundo da Engenharia Elétrica. Ao longo de sua carreira, buscou incessantemente aprimorar seus conhecimentos e habilidades, obtendo diversas especializações, como MBA em Gestão de Energia pela Fundação Getulio Vargas (FGV Rio) em 2003, MBA em Gestão de Projetos pela Unifor em 2005, MBA em Gestão de Processos pela UniFB em 2013, e, em 2023, MBA em Inovação e Indústria 4.1 pelo Instituto Euvaldo Lodi (IEL), mantendo-se na vanguarda das inovações industriais. Além disso, Henrique também possui certificações internacionais de alto prestígio: como Plant Support Management Program pela Alstom University na Suíça (2010) e Commissioning Engineer pela ABB University na Suíça (2011). Sua empresa, Pulso Engenharia, com mais de 18 anos no mercado, hoje conta com mais de 45 colaboradores e mais de 3000 clientes em todo o Nordeste e em São Paulo, trabalhando na área de prestação de serviços de inspeção, projetos, instalação e manutenção elétrica. https://www.instagram.com/enghenriquetavares/",
+            "date_created": "2023-10-19T19:15:11.797Z"
+        }
+    },
+    {
+        "model": "events.events",
+        "pk": 5,
+        "fields": {
+            "title": "Futuro do Setor Elétrico na Era da Singularidade",
+            "host": "Camilo Camurça",
+            "category": "palestra",
+            "number_of_inscriptions": 0,
+            "max_number_of_inscriptions": 115,
+            "date": {
+                "0": {
+                    "start": "2023-11-07T10:30",
+                    "end": "2023-11-07T12:00"
+                }
+            },
+            "description": "Esta palestra aborda os desafios e oportunidades que a Era da Singularidade traz para o setor elétrico, a partir de conceitos da atualidade e do futuro como exponencialidade, transformação digital e singularidade em meio a um novo contexto de incertezas e mudanças contínuas. A palestra também explora tópicos relevantes envolvendo o desafio global 2050 (net zero), o papel do setor elétrico na transição energética e o futuro do trabalho. O desenvolvimento das competências nexialistas é apresentado como forma de se destacar e se manter relevante profissionalmente. Projetada para estudantes de engenharia, esta palestra oferece o despertar e a orientação na construção de uma carreira à prova de futuro.  Camilo Camurça é um profissional com mais de 20 anos de trajetória na Engenharia Elétrica, e vasta experiência em ensino, pesquisa e extensão acadêmica desde a sua graduação na Universidade Federal do Ceará. Além disso, ele traz uma valiosa passagem pelo setor de Mineração e Metalurgia, onde obteve seu Mestrado Profissional na Universidade Federal de Ouro Preto, em colaboração com a Companhia Vale. Com uma sólida atuação no Setor Elétrico, na Coelce / Enel, Camilo ocupou uma série de cargos, de analista a especialista, coordenador e gestor. Sua abrangente atuação abarca planejamento da expansão do sistema elétrico, qualidade do serviço, engenharia e construção, transformação digital, gestão da mudança, auditoria, intraempreendedorismo, além de ser multiplicador facilitador, gestor de negócios, gerente de projetos, embaixador e mentor de inovação. Em 2020, fundou a Nexus beW Empreendedorismo, uma iniciativa dedicada a disseminar o conceito do Nexialismo, cuja missão é restabelecer o equilíbrio entre competências técnicas e comportamentais, sustentação e disrupção, eficiência e inovação, segurança e risco, planejamento e aprendizado. A Nexus compartilha o propósito de Camilo, que é promover a transição para uma nova mentalidade no mundo pós-digital, desenvolvendo o máximo potencial das pessoas e empresas, além de restaurar o equilíbrio nas relações da sociedade, para auxiliá-los a alcançarem resultados relevantes e preservarem valor de forma atemporal.",
+            "date_created": "2023-10-19T19:16:58.387Z"
+        }
+    },
+    {
+        "model": "events.events",
+        "pk": 6,
+        "fields": {
+            "title": "Uma Visão Geral sobre a Computação em Nuvem com a Google",
+            "host": "Iury Rosal da Apoena Stack",
+            "category": "palestra",
+            "number_of_inscriptions": 0,
+            "max_number_of_inscriptions": 75,
+            "date": {
+                "0": {
+                    "start": "2023-11-07T11:00",
+                    "end": "2023-11-07T12:00"
+                }
+            },
+            "description": "A computação em nuvem é o fornecimento de serviços de computação, incluindo servidores, armazenamento, bancos de dados, rede, software, análise e inteligência, pela Internet (“a nuvem”) para oferecer inovações mais rápidas, recursos flexíveis e economias de escala. Neste encontro, conversaremos sobre essa tecnologia com foco para a Google Cloud Platform (GCP), entendendo os principais conceitos, serviços e todo o poder que essa tecnologia pode nos oferecer para lidar com diferentes desafios computacionais. Iury Rosal é Engenheiro de Dados formado em Engenharia de Computação pela UFC, e tem mais de 5 anos de experiência no desenvolvimento de aplicações distribuídas e analíticas no contexto de Dados. Ao longo da sua carreira, passou por grandes consultorias, como Accenture, maior empresa do ramo no mundo, Engineering, a maior consultoria da Itália, e Avenue Code em  São Francisco, na Califórnia, atuando em projetos nacionais e internacionais no contexto de Saúde, Marketing, Telecomunicações, Transporte Público, Serviços Financeiros, Saneamento Básico e Agronegócio. Além disso, atua com criação de conteúdo, pelo Youtube e com treinamentos/mentoria, sendo fundador do projeto Apoena Stack.  https://iuryrosal.dev/",
+            "date_created": "2023-10-19T19:20:16.521Z"
+        }
+    },
+    {
+        "model": "events.events",
+        "pk": 7,
+        "fields": {
+            "title": "PALESTRA H2V",
+            "host": "Ênio Pontes",
+            "category": "palestra",
+            "number_of_inscriptions": 0,
+            "max_number_of_inscriptions": 115,
+            "date": {
+                "0": {
+                    "start": "2023-11-08T09:00",
+                    "end": "2023-11-08T10:30"
+                }
+            },
+            "description": "Enio Pontes de Deus possui Graduação em Engenharia Civil pela Universidade Federal do Ceará (1988), Mestrado em Engenharia Civil pela Pontifícia Universidade Católica do Rio de Janeiro (1993) e Doutorado em Engenharia Estrutural pela Universidade de São Paulo/ Technische Universität Braunschweig (TU-BS) Alemanha, (1997). Professor Visitante na QUT Austrália, Professor (professeure invitée) ENS/LMT de Cachan, França..Coordenador do LAMEFF e Prof. Associado II - Departamento de Eng. Metalúrgica e de Materiais..",
+            "date_created": "2023-10-19T19:39:20.059Z"
+        }
+    },
+    {
+        "model": "events.events",
+        "pk": 8,
+        "fields": {
+            "title": "A importância e o Potencial de Fortaleza no Mercado de Telecomunicações Mundial",
+            "host": "Felipe Yasuda da Angola Cables",
+            "category": "palestra",
+            "number_of_inscriptions": 0,
+            "max_number_of_inscriptions": 75,
+            "date": {
+                "0": {
+                    "start": "2023-11-08T09:00",
+                    "end": "2023-11-08T10:30"
+                }
+            },
+            "description": "Atualmente, Fortaleza é o segundo maior ponto de troca de tráfego do Brasil, estando atrás apenas de São Paulo. Com sua expressiva projeção da taxa de crescimento no mercado de Tecnologia da informação e Comunicação (TIC), sendo a segunda cidade no mundo com o maior número de cabos submarinos. Um dos principais motivos em trazer esta visibilidade para o mercado de telecomunicações é sua localização geográfica, estando próxima tanto da América do Norte, como da África e da Europa. Além da vertente estratégica, as características técnicas possuem sua complexidade específicas em relação a sistemas terrestres comuns. Assim, mesmo com sua importância, ainda é necessário clarificar as necessidade de conhecimento para se atuar como profissional em mercado com potencial de crescimento como o TIC, os campos de atuação que vão muito além do engenheiro de telecomunicações sendo considerado uma esfera  multidisciplinar. Além disso, serão apresentadas as componentes técnicas para a operação de um cabo intercontinental. Felipe Yasuda é Engenheiro eletricista formado pela Universidade Federal do Paraná e iniciou sua carreira no mercado telecomunicações em 2016 como estagiário na Huawei. Em 2017, veio para Fortaleza para trabalhar com projetos de implantação da rede óptica da Oi para os estados do Ceará, Piauí e Maranhão. Hoje, na Angola Cables, é o engenheiro responsável pelos cabos submarinos Brasil e atua no desenho de soluções e da implantação da rede óptica internacional. A Angola Cables é uma multinacional angolana que iniciou suas atividades em 2009, com o intuito de trazer melhor conectividade internacional através de cabos submarinos. Hoje, a empresa é proprietária de 3 cabos submarinos, está presente em mais de 20 países, possui um portfólio que abrange outros serviços além de conectividade por rotas submarinas, englobando inclusive uma cloud desenvolvida pela própria empresa, sendo considerada a empresa número um da África em questão de conectividade segundo o rank Caida.",
+            "date_created": "2023-10-19T19:40:38.797Z"
+        }
+    },
+    {
+        "model": "events.events",
+        "pk": 9,
+        "fields": {
+            "title": "Desenvolvimento Web Fullstack",
+            "host": "Arthur Baquit",
+            "category": "workshop",
+            "number_of_inscriptions": 0,
+            "max_number_of_inscriptions": 16,
+            "date": {
+                "0": {
+                    "start": "2023-11-06T15:30",
+                    "end": "2023-11-06T17:30"
+                },
+                "1": {
+                    "start": "2023-11-07T13:30",
+                    "end": "2023-11-07T15:30"
+                },
+                "2": {
+                    "start": "2023-11-10T13:30",
+                    "end": "2023-11-10T15:30"
+                }
+            },
+            "description": "Neste workshop,  serão trabalhados os conceitos da carreira de Web Developer Fullstack, como se preparar para o mercado de trabalho, introdução a Go, React e Docker, além de conceitos de Engenharia de Software como Padrões de Projeto, incluindo Arquitetura hexagonal e a implementação de um projeto que ponha em prática todos os conceitos abordados. Arthur Baquit é  apaixonado por tecnologia desde criança, quando costumava desmontar computadores antigos para ver como eles funcionavam, e aos 14 anos, começou a programar na linguagem C. Sua carreira como desenvolvedor de software se iniciou na Universidade Federal do Ceará, trabalhando em projetos de desenvolvimento de software autorais, especialmente no âmbito de parcerias público-privadas. Graduado em Engenharia de Sistemas pela Osaka University no Japão, mais tarde se juntou ao mundo dinâmico de startups para aplicar plenamente sua mentalidade voltada ao produto e à tecnologia. Crescendo em uma família empreendedora, desenvolveu  uma perspectiva de produto e foco em criar valor e melhorar a experiência do usuário em todos os seus projetos. Atualmente, está focado em continuar aprendendo e melhorando suas habilidades para trazer um impacto real e positivo para as empresas para as quais trabalha, para os clientes que usam suas aplicações e para o mundo em que vivemos. Áreas de interesse: Software Engineering; Game Engineering; Data Engineering; Analytics Engineering; Cloud.  github.com/arthurbaquit",
+            "date_created": "2023-10-19T19:59:13.317Z"
+        }
+    },
+    {
+        "model": "events.events",
+        "pk": 10,
+        "fields": {
+            "title": "As profissões mais promissoras da era da inteligência artificial",
+            "host": "Aguimar Mendonça Neto",
+            "category": "palestra",
+            "number_of_inscriptions": 0,
+            "max_number_of_inscriptions": 115,
+            "date": {
+                "0": {
+                    "start": "2023-11-08T10:30",
+                    "end": "2023-11-08T12:00"
+                }
+            },
+            "description": "A palestra tem como objetivo apresentar aos participantes as diversas áreas e aplicações da inteligência artificial (IA) no campo do desenvolvimento pessoal e profissional. O mercado de trabalho em TI está em constante transformação devido aos avanços da IA, trazendo novas demandas e oportunidades para profissionais qualificados, tanto no Brasil quanto no exterior. A automação de tarefas repetitivas por meio de IA pode aumentar a produtividade e permitir que os profissionais se dediquem a atividades mais estratégicas e criativas. Além disso, a IA tem o potencial de aprimorar processos e reduzir erros, com soluções como machine learning e computer vision. A palestra visa motivar os participantes a investirem em sua educação continuada em IA, estejam eles iniciando ou migrando de carreira, para que possam se preparar para aproveitar as oportunidades surgindo neste setor. Habilidades técnicas como programação e estatística são fundamentais, mas também competências humanas como criatividade, trabalho em equipe e comunicação. O objetivo é inspirar os participantes a desenvolverem seu potencial nessa área promissora, que terá impacto significativo em diversos setores da economia e da sociedade nos próximos anos. A palestra busca fornecer uma visão abrangente sobre esse universo, para que os participantes identifiquem como podem contribuir e se desenvolver profissionalmente com a IA.  Aguimar Mendonça Neto é bacharel em Ciências da Computação pela UFC e  mestrando em Economia do Setor Público também pela UFC. Atualmente ocupa o cargo de Orientador da Célula de Sistemas de Informação na Secretaria da Fazenda do Estado do Ceará (SEFAZ/CE), onde trabalha desde 2008. Já trabalhou com desenvolvimento de sistemas no Serviço Federal de Processamento de Dados (SERPRO) e Banco do Nordeste do Brasil (BNB). Possui especial curiosidade sobre os avanços do campo de estudo da Inteligência Artificial e sobre as possibilidades que se abrem a partir do desenvolvimento de novas tecnologias.",
+            "date_created": "2023-10-19T20:01:41.447Z"
+        }
+    },
+    {
+        "model": "events.events",
+        "pk": 11,
+        "fields": {
+            "title": "A era do Hidrogênio - Limpo e Inesgotável",
+            "host": "Marcelo Serra",
+            "category": "palestra",
+            "number_of_inscriptions": 0,
+            "max_number_of_inscriptions": 115,
+            "date": {
+                "0": {
+                    "start": "2023-11-09T09:00",
+                    "end": "2023-11-09T10:30"
+                }
+            },
+            "description": "A ERA DO HIDROGÊNIO: Verde... Limpo... Inesgotável... o mais promissor vetor da descarbonização profunda de diversas atividades produtivas da sociedade. A palestra será uma proposição de redução dos efeitos climáticos através da utilização do hidrogênio verde para descarbonização do planeta, apresentando os métodos de obtenção com fontes renováveis de energia e a versatilidade de seu uso. Irão ser mostrados os projetos em andamento e planejados para o Nordeste brasileiro e o potencial de desenvolvimento da região para esse vetor de transformação. Marcelo Serra é engenheiro eletricista formado pela UFPE (Universidade Federal de Pernambuco), com MBA pela USP, mestrado na UFRN (Universidade Federal do Rio Grande do Norte) e gerente de projetos certificado pelo PMI, trabalhou em empresas como Ericsson, Alcatel, Lucent e Nokia. Atualmente é Gerente de Negócio e Projetos da Solier/Qair Brasil.",
+            "date_created": "2023-10-19T20:06:23.740Z"
+        }
+    },
+    {
+        "model": "events.events",
+        "pk": 12,
+        "fields": {
+            "title": "Computação Quântica: Moda ou Realidade?",
+            "host": "Hilma Vasconcelos",
+            "category": "palestra",
+            "number_of_inscriptions": 0,
+            "max_number_of_inscriptions": 75,
+            "date": {
+                "0": {
+                    "start": "2023-11-09T09:00",
+                    "end": "2023-11-09T10:30"
+                }
+            },
+            "description": "No início dos anos 1980, Richard Feynman, Paul Benioff e Yuri Manin forneceram a base para um modelo novo de computação, introduzindo a ideia de computação quântica e mostrando que um computador quântico tem o potencial de resolver problemas que um computador clássico não tem. No entanto, muitos bits quânticos (qubits) são necessários para superar as capacidades dos computadores convencionais, e escalonar os computadores quânticos para serem úteis em aplicações práticas tem se mostrado uma tarefa extremamente difícil. Os desafios técnicos são grandes, mas as vantagens e os impactos são maiores e não restam dúvidas de que o domínio desse campo é essencial para qualquer país que deseja manter as hegemonias tecnológica e econômica neste novo século. Hilma Vasconcelos possui graduação em Física pela Universidade Federal do Ceará (1999), mestrado em Física pela Universidade Federal do Ceará (2000) e doutorado em Física pela University of Notre Dame (2006). Atualmente é Professora Associada do Departamento de Engenharia de Teleinformática da Universidade Federal do Ceará. Tem experiência na área de Física, com ênfase em Óptica Quântica, atuando principalmente em Computação Quântica.",
+            "date_created": "2023-10-19T20:07:33.864Z"
+        }
+    },
+    {
+        "model": "events.events",
+        "pk": 13,
+        "fields": {
+            "title": "Desenvolvimento Web em uma Big Four: Trajetória e Oportunidades",
+            "host": "Maria Eduarda Rocha",
+            "category": "palestra",
+            "number_of_inscriptions": 0,
+            "max_number_of_inscriptions": 75,
+            "date": {
+                "0": {
+                    "start": "2023-11-10T09:00",
+                    "end": "2023-11-10T10:30"
+                }
+            },
+            "description": "Maria Eduarda Rocha é Engenheira de Computação pela Universidade de Fortaleza e desenvolvedora plena na KPMG Lighthouse Brasil, onde iniciou sua trajetória ainda na graduação, quando Bolsista de graduação, desenvolvendo projetos desde o desenvolvimento front end até a automação RPA. Atualmente cursa o mestrado em Informática Aplicada também na UNIFOR.",
+            "date_created": "2023-10-19T20:10:12.126Z"
+        }
+    },
+    {
+        "model": "events.events",
+        "pk": 14,
+        "fields": {
+            "title": "MESA REDONDA Mulheres na Programação",
+            "host": "Code Girls UECE",
+            "category": "palestra",
+            "number_of_inscriptions": 0,
+            "max_number_of_inscriptions": 115,
+            "date": {
+                "0": {
+                    "start": "2023-11-10T10:30",
+                    "end": "2023-11-10T12:00"
+                }
+            },
+            "description": "\"Não vou consertar sua impressora: Uma conversa sobre mulheres na computação\" A mesa redonda reúne mulheres destacadas na área de tecnologia para compartilhar suas experiências, motivações e desafios. As convidadas se apresentam e abordam tópicos como representação de gênero, inspirações, uso de IA e como o perfeccionismo afeta as mulheres na computação. Além disso, a audiência tem a oportunidade de interagir, tornando o evento uma plataforma de discussão e reflexão sobre a presença feminina no campo da tecnologia. O grupo CodeGirls iniciou em 2022 buscando juntar as mulheres estudantes do curso de Ciência da Computação da Uece, prezando o acolhimento das estudantes do curso de forma a evitar a evasão feminina. Promovemos unificações com eventos e reuniões, mantendo o contato com as mulheres do curso, criando uma rede de apoio para as estudantes calouras e veteranas.",
+            "date_created": "2023-10-20T11:09:20.112Z"
+        }
+    },
+    {
+        "model": "events.eventsplaces",
+        "pk": 1,
+        "fields": {
+            "event": 1,
+            "place": 1
+        }
+    },
+    {
+        "model": "events.eventsplaces",
+        "pk": 2,
+        "fields": {
+            "event": 2,
+            "place": 3
+        }
+    },
+    {
+        "model": "events.eventsplaces",
+        "pk": 3,
+        "fields": {
+            "event": 3,
+            "place": 2
+        }
+    },
+    {
+        "model": "events.eventsplaces",
+        "pk": 4,
+        "fields": {
+            "event": 4,
+            "place": 1
+        }
+    },
+    {
+        "model": "events.eventsplaces",
+        "pk": 5,
+        "fields": {
+            "event": 5,
+            "place": 1
+        }
+    },
+    {
+        "model": "events.eventsplaces",
+        "pk": 6,
+        "fields": {
+            "event": 6,
+            "place": 2
+        }
+    },
+    {
+        "model": "events.eventsplaces",
+        "pk": 7,
+        "fields": {
+            "event": 7,
+            "place": 1
+        }
+    },
+    {
+        "model": "events.eventsplaces",
+        "pk": 8,
+        "fields": {
+            "event": 8,
+            "place": 2
+        }
+    },
+    {
+        "model": "events.eventsplaces",
+        "pk": 9,
+        "fields": {
+            "event": 9,
+            "place": 6
+        }
+    },
+    {
+        "model": "events.eventsplaces",
+        "pk": 10,
+        "fields": {
+            "event": 10,
+            "place": 1
+        }
+    },
+    {
+        "model": "events.eventsplaces",
+        "pk": 11,
+        "fields": {
+            "event": 11,
+            "place": 1
+        }
+    },
+    {
+        "model": "events.eventsplaces",
+        "pk": 12,
+        "fields": {
+            "event": 12,
+            "place": 2
+        }
+    },
+    {
+        "model": "events.eventsplaces",
+        "pk": 13,
+        "fields": {
+            "event": 13,
+            "place": 2
+        }
+    },
+    {
+        "model": "events.eventsplaces",
+        "pk": 14,
+        "fields": {
+            "event": 14,
+            "place": 1
+        }
+    }
+]

@@ -24,7 +24,7 @@ class KitsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Kits
         ordering = ['id']
-        fields = ['id', 'user', 'is_payed', 'model', 'model_detail', 'events', 'date_created']
+        fields = ['id', 'user', 'discount', 'is_payed', 'model', 'model_detail', 'events', 'date_created']
 
     def get_events(self, obj):
         # Assuming you have a ManyToMany relationship to Minicourses in Events
@@ -36,6 +36,13 @@ class KitsSerializer(serializers.ModelSerializer):
 class KitsEventsSerializer(serializers.ModelSerializer):
     class Meta:
         model = KitsEvents
+        fields = '__all__'
+
+###########################################################################################
+# KitsDiscount Serializer
+class KitsDiscountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = KitsDiscount
         fields = '__all__'
 
 ###########################################################################################
