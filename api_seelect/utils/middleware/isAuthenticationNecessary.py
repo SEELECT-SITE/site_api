@@ -2,9 +2,10 @@
 endpoints_with_no_authentication_necessary = [
     ('POST', '/api/auth/register/'),
     ('POST', '/api/auth/login/'),
+    ('GET', '/api/auth/email_validation/'),
     ('POST', '/api/contact/'),
     ('GET', '/api/events/'),
-    ('GET', '/api/kits/models/')
+    ('GET', '/api/kits/models/'),
 ]
 
 # Function to check it

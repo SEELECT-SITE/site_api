@@ -2,6 +2,7 @@
 # Imports                                                                                 #
 ###########################################################################################
 from django.http import Http404, HttpResponse
+from django.shortcuts import render
 from django.contrib.auth.hashers import make_password
 
 from utils.functions.generateRandomSalt import generateRandomSalt
@@ -182,7 +183,28 @@ def email_validation(request):
     user.email_validation = True
     user.save()
 
-    # Returning the json data of the user
-    return Response("That's OK BRO, ENJOY SEELECT!")
+    # Rendering the confimation message
+    html_content = """
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Email Confirmation</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    text-align: center;
+                    margin: 50px;
+                }
+            </style>
+        </head>
+        <body>
+            <h1>Email Confirmed</h1>
+            <p>Your email address has been successfully confirmed. You can now login to your account.</p>
+        </body>
+        </html>
+    """
+    return HttpResponse(html_content)
 
 ###########################################################################################
