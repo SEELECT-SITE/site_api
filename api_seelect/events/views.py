@@ -204,6 +204,12 @@ def get_participants_list(request, pk):
     # Creating array
     participants = "id,name,email\r"
     
+    participants = [{
+        "id": "id",
+        "name": "name",
+        "email": "email",
+    }]
+    
     # Getting all kits that are related with this event
     for element in KitsEventsSerializer(query, many=True).data:
         
@@ -212,7 +218,11 @@ def get_participants_list(request, pk):
         profile_serializer = UserProfileResumedSerializer(kit.user)
         user = User.objects.get(pk=kit.user.id)
         
-        participants += f"{profile_serializer.data['id']},{profile_serializer.data['name']},{user.email}\r"
+        participants.append({
+            "id": profile_serializer.data['id'],
+            "name": profile_serializer.data['name'],
+            "email": user.email
+        })
     
     return Response(participants)
 

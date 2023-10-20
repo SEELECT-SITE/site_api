@@ -8,6 +8,8 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     # Request to validate the login and password.
     path('login/', views.login, name='login'),
+    # Request to validate email
+    path('email_validation/', views.email_validation, name='email-validation'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

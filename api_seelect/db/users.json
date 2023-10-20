@@ -5,7 +5,7 @@
         "fields": {
             "role": "admin",
             "email": "abraao@gmail.com",
-            "password": "pbkdf2_sha256$600000$XP>@.mwKrz$5nghMUNWb+EMNI2wGPqeu+L8d2Fdh6+oaNGozQ+SB8k=",
+            "password": "pbkdf2_sha256$600000$x`vyE.L(`$ANl+DkrM/Qpox+PAOiPcGXImDl88NwdyYTfxnVeEAkE=",
             "date_joined": "2023-10-20T14:13:12.478084Z"
         }
     },
@@ -52,10 +52,11 @@
         "pk": 1,
         "fields": {
             "user": 1,
-            "password_salt": "XP>@.mwKrz",
+            "password_salt": "x`vyE.L(`",
             "hash_algorithm": "",
             "token": "ed9e3650ca433a31c5f85614804c586a",
-            "email_validation": false,
+            "email_validation_token": "ed9e3650ca433a31c5f85614804c586a",
+            "email_validation": true,
             "token_generation_time": "2023-10-20T14:13:12.478084Z"
         }
     },
@@ -67,7 +68,8 @@
             "password_salt": "Dd\\()|l5RV",
             "hash_algorithm": "",
             "token": "c20c86e66deb94f8bfcb241e90fcca00",
-            "email_validation": false,
+            "email_validation_token": "c20c86e66deb94f8bfcb241e90fcca00",
+            "email_validation": true,
             "token_generation_time": "2023-10-20T11:07:43.364Z"
         }
     }

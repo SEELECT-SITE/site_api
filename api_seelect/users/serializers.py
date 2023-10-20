@@ -11,7 +11,7 @@ from users.models import *
 class UserAuthenticationSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserAuthentication
-        fields = ['id', 'token', 'password_salt']
+        fields = ['id', 'token', 'email_validation_token', 'email_validation', 'password_salt']
 
 ###########################################################################################
 # User Profile Serializer.

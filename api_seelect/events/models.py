@@ -11,8 +11,8 @@ from django.core.validators import MaxValueValidator
 # Model for places informations.
 class Places(models.Model):
     location = models.CharField(max_length=64, blank=True)
-    url_location = models.CharField(max_length=1024, )
-    capacity = models.PositiveIntegerField(validators=[MaxValueValidator(100000)], blank=False, null=False)
+    url_location = models.CharField(max_length=1024, blank=True, null=True, default='')
+    capacity = models.PositiveIntegerField(validators=[MaxValueValidator(100000)], blank=False, null=False, default=0)
     equipaments = models.TextField(blank=True, null=False)
     date_created = models.DateTimeField(default=timezone.now)
 
@@ -40,6 +40,7 @@ class Events(models.Model):
     def deleteInscription(self):
         self.number_of_inscriptions -= 1
         self.save()
+        
 
 ###########################################################################################
 # Model to relate events and places

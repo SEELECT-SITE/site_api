@@ -2,21 +2,22 @@
 # Imports                                                                                 #
 ###########################################################################################
 from django.http import Http404, HttpResponse
-from django.utils import timezone
 from django.contrib.auth.hashers import make_password
 
 from utils.functions.generateRandomSalt import generateRandomSalt
 from utils.functions.generateRandomHash import generateRandomHash
+from django.core.mail import send_mail
 
-from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from rest_framework import authentication, permissions
 from rest_framework import status
 from rest_framework.pagination import PageNumberPagination
 
 from users.serializers import *
 from kits.serializers import *
+
+import hashlib
+import secrets
 
 ###########################################################################################
 # Pagination Classes                                                                      #
@@ -44,10 +45,25 @@ def register(request):
 
     # Defining Hash Algorithm
     hash_algorithm = 'pbkdf2_sha256'
+    
+    # Generate a random token of 256 bits (32 bytes)
+    token_secret = secrets.token_bytes(32)
 
-    # Generatin Token
-    token = generateRandomHash()
-
+    # Concatenate the email and token
+    data = email.encode() + token_secret
+    
+    # Calculate the SHA-256 hash
+    hash_obj = hashlib.sha256(token_secret)
+    hash_value = hash_obj.digest()
+    
+    # Convert the hash to a hexadecimal representation
+    hash_hex = hash_value.hex()
+    
+    token = hash_hex[:32]
+    token_email = hash_hex[32:]
+    
+    confirmation_link = str(request.get_host()) + '/api/auth/email_validation/?token={token}'.format(token=token_email)
+    
     # Making data json.
     data = {
         'email': email,
@@ -57,9 +73,35 @@ def register(request):
             'password_salt': password_salt,
             'hash_algorithm': hash_algorithm,
             'token': token,
+            'email_validation_token': token_email,
         },
         'profile': {}
     }
+
+    email_message = """
+        Olá,
+
+        Bem-vindo a Seelect! Estamos muito felizes em tê-lo conosco.
+
+        Para confirmar o seu cadastro, clique no link abaixo:
+
+        {link}
+
+        Se você não se cadastrou na Seelect, por favor, ignore este e-mail.
+
+        Estamos empolgados para tê-lo como participante do nosso evento e esperamos que você aproveite ao máximo a sua experiência na Seelect.
+
+        Atenciosamente,
+        A Equipe da Seelect
+    """.format(link=confirmation_link)
+    
+    send_mail(
+        "Confirmação de Cadastro no Seelect",
+        email_message,
+        "joelkalil1@gmail.com",
+        ["joelkalil1@gmail.com"],
+        fail_silently=False
+    )
 
     serializer = UserSerializer(data=data)
 
@@ -86,6 +128,11 @@ def login(request):
     except User.DoesNotExist:
         raise Http404
     
+    auth = UserAuthentication.objects.get(pk=user.auth.id)
+    
+    if not auth.email_validation:
+        return Response("Email isn't validated!", status=status.HTTP_428_PRECONDITION_REQUIRED)
+    
     password_salt = user.auth.password_salt
     password = make_password(password, salt=password_salt, hasher='default')
     
@@ -95,7 +142,7 @@ def login(request):
     except User.DoesNotExist:
         return HttpResponse('User not found!', status=status.HTTP_404_NOT_FOUND)
     
-    UserAuthentication.objects.get(pk=user.auth.id).refresh_token()
+    auth.refresh_token()
     
     # Getting the serializer of the user
     serializer = UserSerializer(User.objects.get(pk=user.id))
@@ -115,5 +162,27 @@ def login(request):
     
     # Returning the json data of the user
     return Response(data)
+
+###########################################################################################
+# .../user/login/
+@api_view(['GET'])
+def email_validation(request):
+    """
+    Validate email.
+    """
+    # Getting token
+    token = request.GET.get('token', None)
+
+    # Checking if the user exist
+    try:
+        user = UserAuthentication.objects.get(email_validation_token=token)
+    except UserAuthentication.DoesNotExist:
+        raise Http404
+        
+    user.email_validation = True
+    user.save()
+
+    # Returning the json data of the user
+    return Response("That's OK BRO, ENJOY SEELECT!")
 
 ###########################################################################################

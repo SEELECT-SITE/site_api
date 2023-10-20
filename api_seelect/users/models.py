@@ -35,6 +35,7 @@ class UserAuthentication(models.Model):
     password_salt = models.CharField(max_length=16, null=False)
     hash_algorithm = models.CharField(max_length=32, null=False)
     token = models.CharField(max_length=128, null=False, unique=True)
+    email_validation_token = models.CharField(max_length=128, null=False, unique=True)
     email_validation = models.BooleanField(default=False)
     token_generation_time = models.DateTimeField(default=timezone.now)
 

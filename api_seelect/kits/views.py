@@ -93,7 +93,7 @@ class KitsList(APIView, StandardUserSetPagination):
                     pass
 
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 ###########################################################################################
 # .../api/kits/<id>
@@ -122,13 +122,13 @@ class KitsDetail(APIView):
         events_data = kits_data.pop('events', [])
         
         # Removing fields which you shouldn't change there.
-        kits_data.pop('user')
-        kits_data.pop('discount')
-        kits_data.pop('is_payed')
+        kits_data.pop('user', None)
+        kits_data.pop('discount', None)
+        kits_data.pop('is_payed', None)
         
         # If the payements was done, you can't change the model.
         if kit.is_payed:
-            kits_data.pop('model')
+            kits_data.pop('model', None)
                 
         kits_serializer = KitsSerializer(kit, data=kits_data)
 
