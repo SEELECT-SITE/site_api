@@ -20,10 +20,10 @@ class Places(models.Model):
 # Model for event informations.
 class Events(models.Model): 
     title = models.CharField(max_length=256, blank=True)
-    host = models.CharField(max_length=256, blank=True, null=False)
-    category = models.CharField(max_length=256, blank=True)
+    host = models.CharField(max_length=256, blank=True, null=False, default='')
+    category = models.CharField(max_length=256, blank=True, default='')
     number_of_inscriptions = models.PositiveIntegerField(validators=[MaxValueValidator(1000)], blank=False, null=False, default=0)
-    max_number_of_inscriptions = models.PositiveIntegerField(validators=[MaxValueValidator(1000)], blank=False, null=False)
+    max_number_of_inscriptions = models.PositiveIntegerField(validators=[MaxValueValidator(1000)], blank=False, null=False, default=20)
     place = models.ManyToManyField(Places, through='EventsPlaces')
     date = models.JSONField(blank=True, default=dict)
     description = models.TextField(blank=True, null=False, default="")
@@ -41,7 +41,6 @@ class Events(models.Model):
         self.number_of_inscriptions -= 1
         self.save()
         
-
 ###########################################################################################
 # Model to relate events and places
 class EventsPlaces(models.Model):

@@ -10,6 +10,10 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     # Request to validate email
     path('email_validation/', views.email_validation, name='email-validation'),
+    # Request to change password
+    path('change_password/', views.change_password, name='change-password'),
+    # Request to change role
+    path('change_role/', views.change_role, name='change-role'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

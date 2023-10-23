@@ -103,23 +103,24 @@ class EventsDetail(APIView):
         event = self.get_object(pk)
         
         events_data = request.data.copy()
-        places_data = events_data.pop('place', [])
+        places_data = events_data.pop('place', None)
 
         event_serializer = EventsSerializer(event, data=events_data)
 
         if event_serializer.is_valid():
             event = event_serializer.save() # Update event data
 
-            # Remove existing associations with places
-            event.place.clear()
+            if not places_data == None:
+                # Remove existing associations with places
+                event.place.clear()
 
-            for place_id in places_data:
-                try:
-                    place = Places.objects.get(pk=place_id)
-                    EventsPlaces.objects.create(event=event, place=place)
-                except Places.DoesNotExist:
-                    pass
-            
+                for place_id in places_data:
+                    try:
+                        place = Places.objects.get(pk=place_id)
+                        EventsPlaces.objects.create(event=event, place=place)
+                    except Places.DoesNotExist:
+                        pass
+                
             return Response(event_serializer.data, status=status.HTTP_200_OK)
         return Response(event_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     

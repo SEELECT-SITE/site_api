@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.contrib.auth.hashers import make_password
 
 from utils.functions.generateRandomSalt import generateRandomSalt
-from utils.functions.generateRandomHash import generateRandomHash
+from utils.middleware.getUserFromToken import get_user_from_token
 from django.core.mail import send_mail
 
 from rest_framework.response import Response
@@ -82,22 +82,22 @@ def register(request):
     email_message = """
         Olá,
 
-        Bem-vindo a Seelect! Estamos muito felizes em tê-lo conosco.
+        Bem-vindo a SEELECT! Estamos muito felizes em tê-lo conosco.
 
         Para confirmar o seu cadastro, clique no link abaixo:
 
         {link}
 
-        Se você não se cadastrou na Seelect, por favor, ignore este e-mail.
+        Se você não se cadastrou na SEELECT, por favor, ignore este e-mail.
 
-        Estamos empolgados para tê-lo como participante do nosso evento e esperamos que você aproveite ao máximo a sua experiência na Seelect.
+        Estamos empolgados para tê-lo como participante do nosso evento e esperamos que você aproveite ao máximo a sua experiência na SEELECT.
 
         Atenciosamente,
-        A Equipe da Seelect
+        A Equipe da SEELECT
     """.format(link=confirmation_link)
     
     send_mail(
-        "Confirmação de Cadastro no Seelect",
+        "Confirmação de Cadastro no SEELECT",
         email_message,
         "joelkalil1@gmail.com",
         [email],
@@ -113,13 +113,13 @@ def register(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 ###########################################################################################
-# .../user/login/
+# .../auth/login/
 @api_view(['POST'])
 def login(request):
     """
     Validate the username and password, to log in the user.
     """
-    # Getting username and password
+    # Getting email and password
     email = request.POST.get('email', None)
     password = request.POST.get('password', None)
 
@@ -165,7 +165,7 @@ def login(request):
     return Response(data)
 
 ###########################################################################################
-# .../user/login/
+# .../auth/email_validation/
 @api_view(['GET'])
 def email_validation(request):
     """
@@ -206,5 +206,58 @@ def email_validation(request):
         </html>
     """
     return HttpResponse(html_content)
+
+###########################################################################################
+# .../auth/change_password/
+@api_view(['POST'])
+def change_password(request):
+    """
+    Change password.
+    """
+    
+    # Getting user
+    user = get_user_from_token(request)
+    
+    # Getting new password
+    password = request.POST.get('new_password', None)
+        
+    # If the password is None, return error.
+    if password == None:
+        return Response("Password can't be null!", status=status.HTTP_400_BAD_REQUEST)
+    
+    # Encrypting the new password with the salt
+    password = make_password(password, salt=user.auth.password_salt, hasher='default')
+    
+    # Updating password
+    user.password = password
+    user.save()
+
+    return Response("Password updated successfully!", status=status.HTTP_200_OK)
+
+###########################################################################################
+# .../auth/change_role/
+@api_view(['POST'])
+def change_role(request):
+    """
+    Change role.
+    """
+    
+    email = request.POST.get('email', None)
+    role = request.POST.get('new_role', None)
+    
+    # Getting user by email
+    user = User.objects.get(email=email)
+        
+    # If the role is user, staff or admin
+    if role in ['user', 'staff', 'admin']:
+        # Updating role
+        user.role = role
+        user.save()
+
+        return Response("Role updated successfully!", status=status.HTTP_200_OK)
+    
+    # Return error
+    else:
+        return Response("Role can't be null!", status=status.HTTP_400_BAD_REQUEST)
 
 ###########################################################################################

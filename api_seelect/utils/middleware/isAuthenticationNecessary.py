@@ -2,6 +2,7 @@
 endpoints_with_no_authentication_necessary = [
     ('POST', '/api/auth/register/'),
     ('POST', '/api/auth/login/'),
+    ('POST', '/api/auth/change_password/'),
     ('GET', '/api/auth/email_validation/'),
     ('POST', '/api/contact/'),
     ('GET', '/api/events/'),

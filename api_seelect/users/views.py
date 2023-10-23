@@ -6,6 +6,7 @@ from django.contrib.auth.hashers import make_password
 
 from utils.functions.generateRandomSalt import generateRandomSalt
 from utils.functions.generateRandomHash import generateRandomHash
+from django.core.mail import send_mail
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -15,6 +16,8 @@ from rest_framework.pagination import PageNumberPagination
 from users.serializers import *
 from kits.serializers import *
 
+import hashlib
+import secrets
 
 ###########################################################################################
 # Pagination Classes                                                                      #
@@ -63,21 +66,62 @@ class RoleList(APIView, StandardUserSetPagination):
         # Defining Hash Algorithm
         hash_algorithm = 'pbkdf2_sha256'
 
-        # Generating Token
-        token = generateRandomHash()
+        # Generate a random token of 256 bits (32 bytes)
+        token_secret = secrets.token_bytes(32)
 
+        # Concatenate the email and token
+        data = email.encode() + token_secret
+        
+        # Calculate the SHA-256 hash
+        hash_obj = hashlib.sha256(token_secret)
+        hash_value = hash_obj.digest()
+        
+        # Convert the hash to a hexadecimal representation
+        hash_hex = hash_value.hex()
+        
+        token = hash_hex[:32]
+        token_email = hash_hex[32:]
+        
+        confirmation_link = str(request.get_host()) + '/api/auth/email_validation/?token={token}'.format(token=token_email)
+        
         # Making data json.
         data = {
-            'role': role,
             'email': email,
             'password': password,
+            'role': 'user',
             'auth': {
                 'password_salt': password_salt,
                 'hash_algorithm': hash_algorithm,
                 'token': token,
+                'email_validation_token': token_email,
             },
             'profile': {}
         }
+        
+        email_message = """
+            Olá,
+
+            Bem-vindo a SEELECT! Estamos muito felizes em tê-lo conosco.
+
+            Para confirmar o seu cadastro, clique no link abaixo:
+
+            {link}
+
+            Se você não se cadastrou na SEELECT, por favor, ignore este e-mail.
+
+            Estamos empolgados para tê-lo como participante do nosso evento e esperamos que você aproveite ao máximo a sua experiência na SEELECT.
+
+            Atenciosamente,
+            A Equipe da SEELECT
+        """.format(link=confirmation_link)
+        
+        send_mail(
+            "Confirmação de Cadastro no SEELECT",
+            email_message,
+            "joelkalil1@gmail.com",
+            [email],
+            fail_silently=False
+        )
 
         serializer = UserSerializer(data=data)
 
@@ -122,44 +166,6 @@ class RoleDetail(APIView):
             data['profile']['kit'] = kit_serializer.data
         
         return Response(data)
-
-    def put(self, request, role, pk, format=None):
-        user = self.get_object(role, pk)
-
-        # Getting user data.
-        email = request.data.get('email', user.email)
-        password = request.data.get('password', user.password)        
-
-        # Creating hash and salt
-        password_salt = UserAuthentication.objects.get(pk=user.auth.id).password_salt
-        password = make_password(request.data.get('password', user.password),salt=password_salt, hasher='default')
-
-        # Defining Hash Algorithm
-        hash_algorithm = 'pbkdf2_sha256'
-
-        # Generating Token
-        token = generateRandomHash()
-
-        profile = UserProfileSerializer(user.profile)
-
-        # Making data json.
-        data = {
-            'role': role,
-            'email': email,
-            'password': password,
-            'auth': {
-                'password_salt': password_salt,
-                'hash_algorithm': hash_algorithm,
-                'token': token,
-            },
-            'profile': profile.data,
-        }
-
-        serializer = UserSerializer(instance=user, data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, role, pk, format=None):
         user = self.get_object(role, pk)
