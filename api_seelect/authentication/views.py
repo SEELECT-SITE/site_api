@@ -2,10 +2,10 @@
 # Imports                                                                                 #
 ###########################################################################################
 from django.http import Http404, HttpResponse
-from django.shortcuts import render
 from django.contrib.auth.hashers import make_password
 
 from utils.functions.generateRandomSalt import generateRandomSalt
+from utils.functions.generateRandomPassword import generate_random_password
 from utils.middleware.getUserFromToken import get_user_from_token
 from django.core.mail import send_mail
 
@@ -99,7 +99,7 @@ def register(request):
     send_mail(
         "Confirmação de Cadastro no SEELECT",
         email_message,
-        "joelkalil1@gmail.com",
+        "seelect2023@gmail.com",
         [email],
         fail_silently=False
     )
@@ -206,6 +206,60 @@ def email_validation(request):
         </html>
     """
     return HttpResponse(html_content)
+
+###########################################################################################
+# .../auth/forget_password/
+@api_view(['POST'])
+def forget_password(request):
+    """
+    Reset password to a random value.
+    """
+    
+    # Getting email
+    email = request.POST.get('email', None)
+    
+    # Getting user
+    try: 
+        user = User.objects.get(email=email)
+    except User.DoesNotExist:
+        return Response("Email not found!", status=status.HTTP_404_NOT_FOUND)
+        
+    # Generating random password
+    password = generate_random_password(12)
+    
+    # Creating email message
+    email_message = """
+        Olá,
+
+        Recebemos uma solicitação para redefinir a senha da sua conta. Abaixo está a sua nova senha:
+
+        Nova Senha: {password}
+
+        Por favor, faça login com essa nova senha e lembre-se de alterá-la para uma de sua escolha assim que entrar na sua conta.
+
+        Se você não solicitou uma redefinição de senha, por favor, entre em contato conosco imediatamente.
+
+        Atenciosamente,
+        A Equipe da SEELECT
+    """.format(password=password)
+    
+    # Encrypting the new password with the salt
+    password = make_password(password, salt=user.auth.password_salt, hasher='default')
+    
+    # Updating password
+    user.password = password
+    user.save()
+    
+    # Sending email
+    send_mail(
+        "Confirmação de Cadastro no SEELECT",
+        email_message,
+        "seelect2023@gmail.com",
+        [email],
+        fail_silently=False
+    )
+
+    return Response("Password updated successfully!", status=status.HTTP_200_OK)
 
 ###########################################################################################
 # .../auth/change_password/
