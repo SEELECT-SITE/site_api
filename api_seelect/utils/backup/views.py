@@ -54,3 +54,5 @@ def export_events(request):
         writer.writerow([event.title, event.host, event.category, event.number_of_inscriptions, event.max_number_of_inscriptions, event.description, event.date_created])
 
     return response
+
+###########################################################################################

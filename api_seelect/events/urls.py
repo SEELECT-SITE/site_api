@@ -13,6 +13,8 @@ urlpatterns = [
     path('places/<int:pk>/', views.PlacesDetail.as_view(), name='places-detail'),
     # Request to get the list of participants from an event.
     path('<int:pk>/participants/', views.get_participants_list, name='events-participants-list'),
+    # Request to get the list of participants from an event in pdf.
+    path('<int:pk>/participants/pdf/', views.get_participants_list_pdf, name='events-participants-list-pdf'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

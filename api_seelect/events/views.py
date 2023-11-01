@@ -1,7 +1,7 @@
 ###########################################################################################
 # Imports                                                                                 #
 ###########################################################################################
-from django.http import Http404
+from django.http import Http404, HttpResponse
 
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
@@ -13,6 +13,12 @@ from rest_framework.pagination import PageNumberPagination
 from events.serializers import *
 from kits.serializers import KitsEventsSerializer, KitsEvents
 from users.serializers import UserProfileResumedSerializer, User
+
+from reportlab.lib.pagesizes import A4
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer
+from reportlab.lib import colors
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.platypus import Image
 
 ###########################################################################################
 # Pagination Classes                                                                      #
@@ -199,7 +205,7 @@ def get_participants_list(request, pk):
     """
     Get participants list by event.
     """
-            
+    
     query = KitsEvents.objects.all().filter(event=pk)
     
     # Creating array
@@ -227,4 +233,106 @@ def get_participants_list(request, pk):
     
     return Response(participants)
 
+###########################################################################################
+# .../api/events/<id>/participants/pdf/
+@api_view(['GET'])
+def get_participants_list_pdf(request, pk):
+    """
+    Get participants list by event.
+    """
+            
+    query = KitsEvents.objects.all().filter(event=pk)
+    
+    # Creating array
+    participants = "id,name,email\r"
+    
+    participants = []
+    
+    # Getting all kits that are related with this event
+    for element in KitsEventsSerializer(query, many=True).data:
+        
+        kit = Kits.objects.get(pk=element['kit'])            
+        
+        profile_serializer = UserProfileResumedSerializer(kit.user)
+        user = User.objects.get(pk=kit.user.id)
+        
+        participants.append({
+            "id": profile_serializer.data['id'],
+            "name": profile_serializer.data['name'],
+            "email": user.email
+        })
+        
+    # Create a PDF object
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="attendance_sheet.pdf"'
+
+    # Create the PDF using ReportLab
+    document = SimpleDocTemplate(response, pagesize=A4)
+    elements = []
+
+    # Getting event object
+    try:
+        event = Events.objects.get(pk=pk)
+    # Return 404 if the event don't exist.
+    except Events.DoesNotExist:
+        raise Http404
+    
+    # Add logo above the header
+    logo_path = './utils/static/img/logo.png'  # Provide the actual path to your logo
+    logo = Image(logo_path, width=100, height=100)  # Adjust width and height as needed
+
+    elements.append(logo)
+    elements.append(Spacer(1, 12))  # Add some space between logo and event info
+    
+    # Add event information as header
+    event_info = [
+        (f"Attendance Sheet", "Title"),
+        (f"{event.id} - {event.title}", "Heading2"),
+        (f"Host: {event.host}", "Heading3"),
+        (f"Category: {event.category}",  "Heading3"),
+        (f"Number of Inscriptions: {event.number_of_inscriptions}",  "Heading3"),
+        (f"Number of Inscriptions: {event.max_number_of_inscriptions}",  "Heading3")
+    ]
+    
+    # Get the default styles for paragraphs
+    styles = getSampleStyleSheet()
+    
+    for info in event_info:
+        # Define a custom style with Times New Roman font
+        style = ParagraphStyle(
+            name='TimesNewRoman',
+            fontName='Times-Roman',
+            parent=styles[info[1]]
+        )
+        elements.append(Paragraph(info[0], style))
+    elements.append(Spacer(1, 12))  # Add some space between event info and table
+
+    
+    # Create a list of lists to represent the table
+    data = [["Name", "Email", "Signature"]]
+
+    for participant in participants:
+        data.append([participant["name"], participant["email"], ""])
+
+    # Define the column widths (in points)
+    col_widths = [220, 190, 150]
+
+    # Create the table with specified column widths
+    table = Table(data, colWidths=col_widths)
+    table.setStyle(TableStyle([('BACKGROUND', (0, 0), (-1, 0), colors.blueviolet),
+                               ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+                               ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+                               ('FONTNAME', (0, 0), (-1, 0), 'Times-Roman'),
+                               ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+                               ('BACKGROUND', (0, 1), (-1, -1), colors.whitesmoke),
+                               ('GRID', (0, 0), (-1, -1), 1, colors.black)]))
+
+    # Add the table to the list of elements
+    elements.append(table)
+
+    # Build the PDF
+    document.build(elements)
+
+    return response
+    
 ###########################################################################################

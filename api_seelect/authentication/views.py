@@ -245,7 +245,7 @@ def forget_password(request):
     
     # Encrypting the new password with the salt
     password = make_password(password, salt=user.auth.password_salt, hasher='default')
-    
+    print(password)
     # Updating password
     user.password = password
     user.save()
