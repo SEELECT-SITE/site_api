@@ -4,9 +4,13 @@
 from django.http import Http404, HttpResponse
 from django.contrib.auth.hashers import make_password
 
-from utils.functions.generateRandomSalt import generateRandomSalt
+from utils.functions.generateRandomSalt import generate_random_salt
 from utils.functions.generateRandomPassword import generate_random_password
+from utils.functions.getEmailMessage import get_email_message, get_forget_password_message
+from utils.functions.emailValidationPage import email_validation_page
 from utils.middleware.getUserFromToken import get_user_from_token
+
+
 from django.core.mail import send_mail
 
 from rest_framework.response import Response
@@ -21,14 +25,6 @@ import hashlib
 import secrets
 
 ###########################################################################################
-# Pagination Classes                                                                      #
-###########################################################################################
-class StandardUserSetPagination(PageNumberPagination):
-    page_size = 10
-    page_size_query_param = 'page_size'
-    max_page_size = 1000
-
-###########################################################################################
 # Requests Classes                                                                        #
 ###########################################################################################
 # .../auth/register
@@ -37,12 +33,19 @@ def register(request):
     """
     Register a new user.
     """
-    # Getting user data.
+    # Getting email
     email = request.POST.get('email', None)    
 
-    # Creating hash and salt
-    password_salt = generateRandomSalt()
-    password = make_password(request.POST.get('password', None), salt=password_salt, hasher='default')
+    # Creating salt for the user password
+    password_salt = generate_random_salt()
+    
+    # Getting password and checking if is null
+    password = request.POST.get('password', None)
+    if not password:
+        return Response("Password can't be null!", status=status.HTTP_400_BAD_REQUEST)
+    
+    # Apllying hashing algorithm in password
+    password = make_password(password, salt=password_salt, hasher='default')
 
     # Defining Hash Algorithm
     hash_algorithm = 'pbkdf2_sha256'
@@ -51,7 +54,7 @@ def register(request):
     token_secret = secrets.token_bytes(32)
 
     # Concatenate the email and token
-    data = email.encode() + token_secret
+    #token_secret = email.encode() + token_secret
     
     # Calculate the SHA-256 hash
     hash_obj = hashlib.sha256(token_secret)
@@ -60,9 +63,11 @@ def register(request):
     # Convert the hash to a hexadecimal representation
     hash_hex = hash_value.hex()
     
+    # Breaking the 256 bits hash into 2 hashs of 128 bits
     token = hash_hex[:32]
     token_email = hash_hex[32:]
     
+    # Creating the confirmation link to validate the email
     confirmation_link = str(request.get_host()) + '/api/auth/email_validation/?token={token}'.format(token=token_email)
     
     # Making data json.
@@ -79,35 +84,23 @@ def register(request):
         'profile': {}
     }
 
-    email_message = """
-        Olá,
-
-        Bem-vindo a SEELECT! Estamos muito felizes em tê-lo conosco.
-
-        Para confirmar o seu cadastro, clique no link abaixo:
-
-        {link}
-
-        Se você não se cadastrou na SEELECT, por favor, ignore este e-mail.
-
-        Estamos empolgados para tê-lo como participante do nosso evento e esperamos que você aproveite ao máximo a sua experiência na SEELECT.
-
-        Atenciosamente,
-        A Equipe da SEELECT
-    """.format(link=confirmation_link)
-    
-    send_mail(
-        "Confirmação de Cadastro no SEELECT",
-        email_message,
-        "seelect2023@gmail.com",
-        [email],
-        fail_silently=False
-    )
-
     serializer = UserSerializer(data=data)
 
+    # If the serialzier is valid
     if serializer.is_valid():
         serializer.save()
+        
+        # Get email message
+        email_message = get_email_message(confirmation_link)
+        
+        # Sending email
+        send_mail(
+            "Confirmação de Cadastro no SEELECT",
+            email_message,
+            "seelect2023@gmail.com",
+            [email],
+            fail_silently=False
+        )
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -129,33 +122,33 @@ def login(request):
     except User.DoesNotExist:
         raise Http404
     
-    auth = UserAuthentication.objects.get(pk=user.auth.id)
-    
-    if not auth.email_validation:
+    # Checking if the email was validated
+    if not user.auth.email_validation:
         return Response("Email isn't validated!", status=status.HTTP_428_PRECONDITION_REQUIRED)
     
+    # Hashing the password
     password_salt = user.auth.password_salt
     password = make_password(password, salt=password_salt, hasher='default')
     
     # Checking if the password is correct
-    try:
-        user = User.objects.get(email=email, password=password)
-    except User.DoesNotExist:
-        return HttpResponse('User not found!', status=status.HTTP_404_NOT_FOUND)
+    if not password == user.password:
+        return HttpResponse('Password Incorrect!', status=status.HTTP_404_NOT_FOUND)
     
-    auth.refresh_token()
+    # Refreshing token
+    user.auth.refresh_token()
     
     # Getting the serializer of the user
-    serializer = UserSerializer(User.objects.get(pk=user.id))
+    serializer = UserSerializer(user)
     data = serializer.data
 
-    # Getting the kit by the user id.
+    # Getting the kit by the user id
     try:
         kit = Kits.objects.get(user=user.id)
-    # Setting None if the kit don't exist.
+    # Setting None if the kit don't exist
     except Kits.DoesNotExist:
         kit = None
 
+    # If the kit exist, we add this on the data json
     if kit:
         kit_serializer = KitsSerializer(kit)
         # Adding kit to data json
@@ -179,32 +172,14 @@ def email_validation(request):
         user = UserAuthentication.objects.get(email_validation_token=token)
     except UserAuthentication.DoesNotExist:
         raise Http404
-        
+    
+    # We set true the email validation
     user.email_validation = True
     user.save()
 
     # Rendering the confimation message
-    html_content = """
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Email Confirmation</title>
-            <style>
-                body {
-                    font-family: Arial, sans-serif;
-                    text-align: center;
-                    margin: 50px;
-                }
-            </style>
-        </head>
-        <body>
-            <h1>Email Confirmed</h1>
-            <p>Your email address has been successfully confirmed. You can now login to your account.</p>
-        </body>
-        </html>
-    """
+    html_content = email_validation_page()
+    
     return HttpResponse(html_content)
 
 ###########################################################################################
@@ -228,24 +203,11 @@ def forget_password(request):
     password = generate_random_password(12)
     
     # Creating email message
-    email_message = """
-        Olá,
-
-        Recebemos uma solicitação para redefinir a senha da sua conta. Abaixo está a sua nova senha:
-
-        Nova Senha: {password}
-
-        Por favor, faça login com essa nova senha e lembre-se de alterá-la para uma de sua escolha assim que entrar na sua conta.
-
-        Se você não solicitou uma redefinição de senha, por favor, entre em contato conosco imediatamente.
-
-        Atenciosamente,
-        A Equipe da SEELECT
-    """.format(password=password)
+    email_message = get_forget_password_message(password)
     
     # Encrypting the new password with the salt
     password = make_password(password, salt=user.auth.password_salt, hasher='default')
-    print(password)
+
     # Updating password
     user.password = password
     user.save()

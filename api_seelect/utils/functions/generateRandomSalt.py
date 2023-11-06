@@ -5,7 +5,8 @@ import time
 # Global variables
 random.seed(time.time())
 
-def generateRandomSalt(salt_size=10):
+# Function which creates a random salt
+def generate_random_salt(salt_size=10):
     random_salt = ''
 
     for i in range(salt_size):

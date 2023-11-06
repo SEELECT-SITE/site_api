@@ -11,8 +11,8 @@ urlpatterns = [
     path('models/', views.KitsModelsList.as_view(), name='kits-models-list'),
     # Request to get specific kit model by id.
     path('models/<int:pk>/', views.KitsModelsDetail.as_view(), name='kits-models-detail'),
-    # Requesto to confirm payement
-    path('<int:pk>/confirm_payement/', views.confirm_payement, name='kits-confirm-payement'),
+    # Requesto to confirm payment
+    path('<int:pk>/confirm_payment/', views.confirm_payment, name='kits-confirm-payment'),
     # Request to get all kits discounts.
     path('discount/', views.KitsDiscountList.as_view(), name='kits-discount-list'),
     # Request to get specific kit discount by id.

@@ -4,7 +4,7 @@
 from django.http import Http404
 from django.contrib.auth.hashers import make_password
 
-from utils.functions.generateRandomSalt import generateRandomSalt
+from utils.functions.generateRandomSalt import generate_random_salt
 from utils.functions.generateRandomHash import generateRandomHash
 from django.core.mail import send_mail
 
@@ -60,7 +60,7 @@ class RoleList(APIView, StandardUserSetPagination):
         password = request.POST.get('password', None)        
 
         # Creating hash and salt
-        password_salt = generateRandomSalt()
+        password_salt = generate_random_salt()
         password = make_password(request.POST.get('password', None),salt=password_salt, hasher='default')
 
         # Defining Hash Algorithm

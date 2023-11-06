@@ -2,12 +2,11 @@
 # Imports                                                                                 #
 ###########################################################################################
 from django.db import models
-from django.utils import timezone
 
 ###########################################################################################
 # Models                                                                                  #
 ###########################################################################################
-# Model for user informations.
+# Model for hashing algorithm used to encrypt the password.
 class HashingAlgorithm(models.Model):
     algorithm_name = models.CharField(max_length=32)
 ###########################################################################################

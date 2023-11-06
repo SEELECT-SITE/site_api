@@ -12,3 +12,5 @@ class HashingAlgorithmSerializer(serializers.ModelSerializer):
     class Meta:
         model = HashingAlgorithm
         fields = ['id', 'algorithm_name']
+
+###########################################################################################

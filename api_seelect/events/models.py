@@ -29,6 +29,7 @@ class Events(models.Model):
     description = models.TextField(blank=True, null=False, default="")
     date_created = models.DateTimeField(default=timezone.now)
 
+    # Function to increment the inscription number of the event.
     def newInscription(self):
         if (self.number_of_inscriptions < self.max_number_of_inscriptions):
             self.number_of_inscriptions += 1
@@ -37,6 +38,7 @@ class Events(models.Model):
         else:
             return None
     
+    # Function to decrement the inscription number of the event.
     def deleteInscription(self):
         self.number_of_inscriptions -= 1
         self.save()

@@ -14,7 +14,7 @@ from .serializers import *
 # Pagination Classes                                                                      #
 ###########################################################################################
 class StandardUserSetPagination(PageNumberPagination):
-    page_size = 10
+    page_size = 25
     page_size_query_param = 'page_size'
     max_page_size = 1000
 
@@ -39,7 +39,6 @@ class ContactList(APIView, StandardUserSetPagination):
 
         serializer = Contact(queryset, many=True)
         return Response(serializer.data)
-
 
     def post(self, request, format=None):
         serializer = ContactSerializer(data=request.data)

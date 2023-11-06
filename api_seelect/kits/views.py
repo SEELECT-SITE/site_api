@@ -17,7 +17,7 @@ from users.serializers import *
 # Pagination Classes                                                                      #
 ###########################################################################################
 class StandardUserSetPagination(PageNumberPagination):
-    page_size = 100
+    page_size = 500
     page_size_query_param = 'page_size'
     max_page_size = 1000
 
@@ -304,9 +304,9 @@ class KitsDiscountDetail(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
     
 ###########################################################################################
-# .../api/kits/<id>/confirm_payement/
+# .../api/kits/<id>/confirm_payment/
 @api_view(['POST'])
-def confirm_payement(request, pk):
+def confirm_payment(request, pk):
     """
     Confirm payment.
     """
