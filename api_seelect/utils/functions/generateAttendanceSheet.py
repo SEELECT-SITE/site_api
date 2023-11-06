@@ -48,7 +48,7 @@ def generate_attendance_sheet(participants=[], event=None):
     elements.append(Spacer(1, 12))  # Add some space between event info and table
 
     # Create a list of lists to represent the table
-    data = [["Kit", "Payment", "Name", "Email", "Presence"]]
+    data = [["Kit", "Payment", "Name", "Email", "1", "2", "3"]]
     
     # Create a custom style for the checkbox
     checkbox_style = ParagraphStyle(
@@ -59,10 +59,10 @@ def generate_attendance_sheet(participants=[], event=None):
     )
     
     for participant in participants:
-        data.append([participant["kit_model"], participant["kit_status"], participant["name"], participant["email"], Paragraph('&#9744;', style=checkbox_style)])
+        data.append([participant["kit_model"], participant["kit_status"], participant["name"], participant["email"], "", "", ""])
 
     # Define the column widths (in points)
-    col_widths = [75, 50, 220, 190, 50]
+    col_widths = [65, 45, 215, 190, 20, 20, 20]
 
     # Create the table with specified column widths
     table = Table(data, colWidths=col_widths)
