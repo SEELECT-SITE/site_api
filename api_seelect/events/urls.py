@@ -12,7 +12,7 @@ urlpatterns = [
     path('places/', views.PlacesList.as_view(), name='places-list'),
     # Request to get specific place by id.
     path('places/<int:pk>/', views.PlacesDetail.as_view(), name='places-detail'),
-    # Request to get a json with the participants from an event.
+    # Request to get a csv with the participants from an event.
     path('<int:pk>/participants/', views.get_participants_list, name='events-participants-list'),
     # Request to get the list of participants from an event in pdf.
     path('<int:pk>/participants/pdf/', views.get_participants_list_pdf, name='events-participants-list-pdf'),

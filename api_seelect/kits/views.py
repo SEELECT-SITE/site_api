@@ -16,7 +16,7 @@ from users.serializers import *
 ###########################################################################################
 # Pagination Classes                                                                      #
 ###########################################################################################
-class StandardUserSetPagination(PageNumberPagination):
+class StandardKitSetPagination(PageNumberPagination):
     page_size = 500
     page_size_query_param = 'page_size'
     max_page_size = 1000
@@ -25,11 +25,11 @@ class StandardUserSetPagination(PageNumberPagination):
 # Requests Classes                                                                        #
 ###########################################################################################
 # .../api/kits/
-class KitsList(APIView, StandardUserSetPagination):
+class KitsList(APIView, StandardKitSetPagination):
     """
     List all kits, or create a new kit.
     """
-    pagination_class = StandardUserSetPagination
+    pagination_class = StandardKitSetPagination
 
     def get(self, request, format=None):    
         queryset = Kits.objects.get_queryset().order_by('id')
@@ -175,11 +175,11 @@ class KitsDetail(APIView):
     
 ###########################################################################################
 # .../api/kits/models/
-class KitsModelsList(APIView, StandardUserSetPagination):
+class KitsModelsList(APIView, StandardKitSetPagination):
     """
     List all kits models, or create a new kit model.
     """
-    pagination_class = StandardUserSetPagination
+    pagination_class = StandardKitSetPagination
 
     def get(self, request, format=None):    
         queryset = KitModels.objects.get_queryset().order_by('id')
@@ -240,11 +240,11 @@ class KitsModelsDetail(APIView):
 
 ###########################################################################################
 # .../api/kits/discount/
-class KitsDiscountList(APIView, StandardUserSetPagination):
+class KitsDiscountList(APIView, StandardKitSetPagination):
     """
     List all kits discounts, or create a new kit discount.
     """
-    pagination_class = StandardUserSetPagination
+    pagination_class = StandardKitSetPagination
 
     def get(self, request, format=None):    
         queryset = KitsDiscount.objects.get_queryset().order_by('id')
@@ -327,7 +327,7 @@ def confirm_payment(request, pk):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 ###########################################################################################
-# .../api/kits/<id>/confirm_payement/
+# .../api/kits/<id>/change_discount/
 @api_view(['POST'])
 def change_discount(request, pk):
     """

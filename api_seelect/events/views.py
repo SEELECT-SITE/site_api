@@ -12,9 +12,11 @@ from rest_framework.pagination import PageNumberPagination
 
 from events.serializers import *
 from kits.serializers import KitsEventsSerializer, KitsEvents
-from users.serializers import UserProfileResumedSerializer, User
+from users.serializers import UserProfileSerializer, User
 
 from utils.functions.generateAttendanceSheet import generate_attendance_sheet
+
+import csv
 
 ###########################################################################################
 # Pagination Classes                                                                      #
@@ -205,30 +207,55 @@ def get_participants_list(request, pk):
     query = KitsEvents.objects.all().filter(event=pk)
     
     # Creating array with labels    
-    participants = [{
-        "id": "id",
-        "name": "name",
-        "email": "email",
-    }]
+    participants = []
     
     # Getting all kits that are related with this event
     for element in KitsEventsSerializer(query, many=True).data:
         
         kit = Kits.objects.get(pk=element['kit'])            
         
-        profile_serializer = UserProfileResumedSerializer(kit.user)
+        profile_serializer = UserProfileSerializer(kit.user)
         user = User.objects.get(pk=kit.user.id)
         
         participants.append({
             "id": profile_serializer.data['id'],
-            "name": profile_serializer.data['name'],
             "email": user.email,
-            "kit_model": kit.model.model,
-            "kit_status": kit.is_payed
+            "name": f"{profile_serializer.data['first_name']} {profile_serializer.data['last_name']}",
+            "first_name": profile_serializer.data['first_name'],
+            "last_name": profile_serializer.data['last_name'],
+            "ies": profile_serializer.data['ies'],
+            "birthday": profile_serializer.data['birthday'],
+            "course": profile_serializer.data['course'],
+            "semester": profile_serializer.data['semester'],
+            #"kit_model": kit.model.model,
+            #"kit_status": kit.is_payed
         })
-    
-    return Response(participants)
+        
+    # Create a CSV file in memory
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="participants_event_{pk}.csv"'.format(pk=pk)
 
+    # Create the CSV writer
+    writer = csv.writer(response)
+    writer.writerow(['Id', 'Email', 'Name', 'First Name', 'Last Name', 'IES', 'Birthday', 'Course', 'Semester'])#, 'Kit Model', 'Payment Status']) # Headers
+
+    # Write user data to CSV
+    for participant in participants:
+        writer.writerow([participant["id"], 
+                        participant["email"], 
+                        participant["name"], 
+                        participant["first_name"],
+                        participant["last_name"],
+                        participant["ies"],
+                        participant["birthday"],
+                        participant["course"],
+                        participant["semester"],
+                        #participant["kit_model"], 
+                        #participant["kit_status"]
+        ])
+
+    return response
+    
 ###########################################################################################
 # .../api/events/<id>/participants/pdf/
 @api_view(['GET'])

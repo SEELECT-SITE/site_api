@@ -32,7 +32,7 @@ class KitsSerializer(serializers.ModelSerializer):
         return EventsSerializer(events, many=True).data     # Serialize the mini_courses 
 
 ###########################################################################################
-# EventsPlaces Serializer
+# KitsEvents Serializer
 class KitsEventsSerializer(serializers.ModelSerializer):
     class Meta:
         model = KitsEvents

@@ -1,4 +1,19 @@
-# Tutorial API
+# SEELECT API
+
+## 0. Introduction
+
+SEEELECT means "SEMANA DAS ENGENHARIAS DE COMPUTAÇÃO, ELÉTRICA E TELECOMUNICAÇÕES", which is the week reserved to promote the graduation courses of electrical, telecommunications and computer engineering. In SEELECT we have workshops, courses, speeches, visits to companies. To enjoy that, you should pay for a kit, which have some types:
+
+- Free
+- Discovery
+- Explorer
+- Premium
+
+Each kit allows you to participate of a specific number of activities. The Free version, allows you to participate of the speeches proportioned by the sponsors of the SELECT, so on the opening and ending events.
+
+So to manage the users, events, kits, authentication, permissions, and other stuffs, like contact messages on the website, I created this API using Django, to support the front-end. 
+
+The project was made in 1–2 months by a student, me, so logically it has some problems and many features that were thought and not implemented, probably I'll implement until the next SELECT, in 2024.
 
 ## 1. Installation
 ### 1.1 Install Python 3 on Ubuntu and Python Virtual Environment.
@@ -123,12 +138,24 @@ deactivate
 
 You can start using the command (in this case the adresse ip will be localhost [127.0.0.1]) :
 
+[Linux]
 ```sh 
 python3 manage.py runserver
 ```
 
+[Windows]
+```sh 
+python manage.py runserver
+```
+
 If you want to use a specific ip, just add after runserver :
 
+[Linux]
 ```sh 
 python3 manage.py runserver [ip]
+```
+
+[Windows]
+```sh 
+python manage.py runserver [ip]
 ```

@@ -50,14 +50,6 @@ def generate_attendance_sheet(participants=[], event=None):
     # Create a list of lists to represent the table
     data = [["Kit", "Payment", "Name", "Email", "1", "2", "3"]]
     
-    # Create a custom style for the checkbox
-    checkbox_style = ParagraphStyle(
-        name='CheckboxStyle',
-        fontSize=12,
-        leading=14,
-        textColor="#FFFFFF",
-    )
-    
     for participant in participants:
         data.append([participant["kit_model"], participant["kit_status"], participant["name"], participant["email"], "", "", ""])
 
