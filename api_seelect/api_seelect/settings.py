@@ -68,7 +68,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'api_seelect.middleware.AuthenticationMiddleware'
+    #'api_seelect.middleware.AuthenticationMiddleware'
 ]
 
 ROOT_URLCONF = 'api_seelect.urls'

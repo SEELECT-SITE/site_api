@@ -15,11 +15,10 @@ import csv
 ###########################################################################################
 # Requests Classes                                                                        #
 ###########################################################################################
-# .../export_users
 @api_view(['GET'])
 def export_users(request):
-    # Get all users
-    users = User.objects.all()
+    # Get all users with their profile data
+    users = User.objects.all().prefetch_related('profile')
 
     # Create a CSV file in memory
     response = HttpResponse(content_type='text/csv')
@@ -27,11 +26,24 @@ def export_users(request):
 
     # Create the CSV writer
     writer = csv.writer(response)
-    writer.writerow(['Role', 'Email', 'Password', 'Date Joined']) # Headers
+    writer.writerow(['Role', 'Email', 'Date Joined', 'First Name', 'Last Name', 'IES', 'Birthday', 'CPF', 'Course', 'Semester']) # Headers
 
     # Write user data to CSV
     for user in users:
-        writer.writerow([user.role, user.email, user.password, user.date_joined])
+        # Extract user and profile data
+        profile = user.profile
+        writer.writerow([
+            user.role,
+            user.email,
+            user.date_joined,
+            profile.first_name,
+            profile.last_name,
+            profile.ies,
+            profile.birthday,
+            profile.cpf,
+            profile.course,
+            profile.semester
+        ])
 
     return response
 
