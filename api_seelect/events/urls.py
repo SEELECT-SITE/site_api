@@ -16,6 +16,8 @@ urlpatterns = [
     path('<int:pk>/participants/', views.get_participants_list, name='events-participants-list'),
     # Request to get the list of participants from an event in pdf.
     path('<int:pk>/participants/pdf/', views.get_participants_list_pdf, name='events-participants-list-pdf'),
+    # Request to get the list of attendence from an event.
+    path('<int:pk>/attendance/', views.EventAttendanceView.as_view(), name='events-participants-attendenc'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

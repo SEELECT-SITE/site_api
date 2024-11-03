@@ -3,6 +3,9 @@
 ###########################################################################################
 from django.http import Http404, HttpResponse
 
+from datetime import datetime, timezone
+from django.utils.dateparse import parse_datetime
+
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 
@@ -10,9 +13,12 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.pagination import PageNumberPagination
 
+from kits.models import Kits, KitsEvents
+from users.models import User, UserProfile
+
 from events.serializers import *
-from kits.serializers import KitsEventsSerializer, KitsEvents
-from users.serializers import UserProfileSerializer, User
+from kits.serializers import KitsEventsSerializer
+from users.serializers import UserProfileSerializer, UserProfileResumedSerializer
 
 from utils.functions.generateAttendanceSheet import generate_attendance_sheet
 
@@ -296,3 +302,95 @@ def get_participants_list_pdf(request, pk):
     return generate_attendance_sheet(participants, event)
     
 ###########################################################################################
+# .../api/events/<id>/attendance/
+class EventAttendanceView(APIView):
+    """
+    Retrieve or update the attendance list for an event.
+    """
+    def get_event(self, pk):
+        try:
+            return Events.objects.get(pk=pk)
+        except Events.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        event = self.get_event(pk)
+        attendance_list, created = AttendanceList.objects.get_or_create(event=event)
+
+        # Process event dates to get hours per day
+        date_dict = event.date  # This is the JSONField with the date data
+        hours_per_day = []
+        num_days = len(date_dict)
+        for day_index in range(num_days):
+            day_info = date_dict.get(str(day_index), {})
+            start_time_str = day_info.get('start')
+            end_time_str = day_info.get('end')
+            if start_time_str and end_time_str:
+                # Parse the time strings into datetime objects
+                start_time = parse_datetime(start_time_str)
+                end_time = parse_datetime(end_time_str)
+                # Ensure timezones are aware
+                if start_time.tzinfo is None:
+                    start_time = start_time.replace(tzinfo=timezone.utc)
+                if end_time.tzinfo is None:
+                    end_time = end_time.replace(tzinfo=timezone.utc)
+                # Calculate the duration in hours
+                duration = (end_time - start_time).total_seconds() / 3600
+                hours_per_day.append(duration)
+            else:
+                hours_per_day.append(0)
+
+        # Initialize days as list of False
+        days = [False] * num_days
+
+        # Get current participants of the event
+        participants = self.get_event_participants(event)
+
+        # Get existing participant IDs in the attendance list
+        existing_participant_ids = set(attendance.participant.id for attendance in attendance_list.attendances.all())
+
+        # Identify new participants who need attendance records
+        new_participants = [participant for participant in participants if participant.id not in existing_participant_ids]
+
+        # Create attendance records for new participants
+        for participant in new_participants:
+            Attendance.objects.create(
+                attendance_list=attendance_list,
+                participant=participant,
+                days=days,
+                hours_per_day=hours_per_day
+            )
+
+        serializer = AttendanceListSerializer(attendance_list)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def put(self, request, pk, format=None):
+        event = self.get_event(pk)
+        attendance_list = AttendanceList.objects.get(event=event)
+        serializer = AttendanceListSerializer(attendance_list, data=request.data, partial=True)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    def delete(self, request, pk, format=None):
+        """
+        Delete the attendance list for an event.
+        """
+        event = self.get_event(pk)
+        try:
+            attendance_list = AttendanceList.objects.get(event=event)
+            attendance_list.delete()
+            return Response({'detail': 'Attendance list deleted successfully.'}, status=status.HTTP_204_NO_CONTENT)
+        except AttendanceList.DoesNotExist:
+            return Response({'detail': 'Attendance list does not exist.'}, status=status.HTTP_404_NOT_FOUND)
+
+    def get_event_participants(self, event):
+        """
+        Get participants associated with the event.
+        """
+        kits_events = KitsEvents.objects.filter(event=event)
+        kits = [kits_event.kit for kits_event in kits_events]
+        participants = UserProfile.objects.filter(kits__in=kits).distinct()
+        return participants

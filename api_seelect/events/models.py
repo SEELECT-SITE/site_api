@@ -5,6 +5,8 @@ from django.db import models
 from django.utils import timezone
 from django.core.validators import MaxValueValidator
 
+from users.models import UserProfile
+
 ###########################################################################################
 # Models                                                                                  #
 ###########################################################################################
@@ -48,4 +50,23 @@ class Events(models.Model):
 class EventsPlaces(models.Model):
     event = models.ForeignKey(Events, on_delete=models.CASCADE)
     place = models.ForeignKey(Places, on_delete=models.CASCADE)
+    
 ###########################################################################################
+# Model for attendance lists associated with events.
+class AttendanceList(models.Model):
+    event = models.OneToOneField(Events, on_delete=models.CASCADE, related_name='attendance_list')
+    date_created = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"Attendance List for {self.event.title}"
+
+###########################################################################################
+# Model for attendance associated with attendance list.
+class Attendance(models.Model):
+    attendance_list = models.ForeignKey(AttendanceList, on_delete=models.CASCADE, related_name='attendances')
+    participant = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    days = models.JSONField(blank=True, default=list)  # List of booleans indicating presence per day
+    hours_per_day = models.JSONField(blank=True, default=list)  # Optional list of hours per day
+
+    def __str__(self):
+        return f"Attendance for {self.participant.first_name} {self.participant.last_name} in {self.attendance_list.event.title}"

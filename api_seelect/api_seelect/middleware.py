@@ -31,12 +31,12 @@ class AuthenticationMiddleware:
         
         # Checking if we got some user
         if user is None:
-            return HttpResponse("Invalid token", status=status.HTTP_401_UNAUTHORIZED)
+            return HttpResponse("Access Unauthorized!", status=status.HTTP_401_UNAUTHORIZED)
         
         # Now, let's check if the user can acess this endpoint
         if user.role == 'user' and canUserAcess(request=request, user=user) == False:
             # Returning status 401
-            return HttpResponse("Access unauthorized!", status=status.HTTP_401_UNAUTHORIZED)
+            return HttpResponse("Access Unauthorized!", status=status.HTTP_401_UNAUTHORIZED)
 
         # If the token is valid, go to request
         response = self.get_response(request)
